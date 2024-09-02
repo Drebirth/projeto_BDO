@@ -1,0 +1,34 @@
+@model IEnumerable<projetoBDO.Entities.local.Local>
+
+@{
+    ViewData["Title"] = "Locais de grind";
+}
+
+<div class="container">
+    <h1>Spots</h1>
+    <a asp-action="Create">Adicionar Spot</a>
+</div>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var spot in Model )
+        {
+        <tr>
+            <td>@Html.DisplayFor(model => spot.Id)</td>
+            <td>@Html.DisplayFor(model => spot.Nome)</td>
+            <td>
+                <a asp-controller="Item" asp-action="Create" asp-route-id='@spot.Id'> Adicionar Itens</a>
+                <a asp-controller="Item" asp-action="Index" asp-route-id='@spot.Id'>Lista de itens</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

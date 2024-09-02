@@ -1,0 +1,22 @@
+@model projetoBDO.Entities.item.Item
+
+
+@{
+    ViewData["Title"] = "Adicionar Item";
+}
+
+<div class="container">
+    <form asp-action="Create" method="post" >
+        <label for="Nome">Nome Item
+            <input type="text" asp-for="Nome" class="form-control" />
+        </label>
+        <label for="Preco">Preço do Item
+            <input type="text" asp-for="Preco" />
+        </label>
+        
+        <div>
+            <button type="submit">Salvar</button>
+        </div>
+    </form>
+</div>
+
