@@ -4,9 +4,8 @@
         ViewData["Title"] = "Item de grind";
     }
 
-<h1>Itens cadastrados no sistema</h1>
-<h2>Cadastrar novos Itens</h2>
-<a asp-action="Create">Novo Item</a>
+<h1>Lista de grind</h1>
+
 <table class="table">
     <thead>
         <tr>
@@ -27,6 +26,8 @@
            <!-- <td>@Html.DisplayFor(model => item.SpotId)</td>-->
             <td>@Html.DisplayFor(model => item.Spot.Nome)</td>
         </tr>
+        
         }
     </tbody>
 </table>
+<a asp-controller="Local" asp-action="Index">Voltar</a>

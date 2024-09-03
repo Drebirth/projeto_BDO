@@ -1,0 +1,18 @@
+@model projetoBDO.Entities.local.Local
+
+@{
+    ViewData["Title"] = "Detalhes do Spot";
+}
+
+<h1>@Html.DisplayFor(x => x.Nome)</h1>
+<h2>Dados do local</h2>
+<dt>
+    @foreach(var teste in Model.Itens)
+    {
+        <dl>Item: @teste.Nome</dl>
+        <dl>Valor: @teste.Preco</dl>
+    }
+</dt>
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>

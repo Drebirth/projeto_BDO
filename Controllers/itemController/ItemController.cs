@@ -19,7 +19,10 @@ namespace projetoBDO.Controllers.itemController
             _bdoContext = bdoContext;
         }
 
+        
         public IActionResult Index(long id){
+            
+           
             var lista = _bdoContext.Itens.ToList().Where(x => x.SpotId == id);
             var local = _bdoContext.Spots.Find(id);
             return View(lista);
@@ -31,17 +34,9 @@ namespace projetoBDO.Controllers.itemController
 
         [HttpPost]
         public IActionResult Create(Item item, long id)
-        {
-          //  var teste = _bdoContext.Spots.FromSql($"SELECT * FROM spots where Nome = {item.Spot}");
-            
+        {            
             var teste = _bdoContext.Spots.Find(id);
             Item i = new Item();
-                 //item.Spot = teste;
-                 //item.SpotId = id;
-                // _bdoContext.Itens.Add(item);
-                // _bdoContext.SaveChanges();
-                // return RedirectToAction("Index");
-            //FromSql($"SELECT * FROM SPOTS WHERE Nome = {item.Spot}");
             if(ModelState.IsValid)
             {
                  i.Nome = item.Nome;
