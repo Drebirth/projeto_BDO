@@ -25,9 +25,14 @@
             <td>@Html.DisplayFor(model => item.Preco)</td>
            <!-- <td>@Html.DisplayFor(model => item.SpotId)</td>-->
             <td>@Html.DisplayFor(model => item.Spot.Nome)</td>
+            <td>
+            <a asp-action="Edit" asp-route-id="@item.Id">Editar Item</a>
+
+            </td/>
         </tr>
         
         }
+        
     </tbody>
 </table>
 <a asp-controller="Local" asp-action="Index">Voltar</a>

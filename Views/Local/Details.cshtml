@@ -7,10 +7,10 @@
 <h1>@Html.DisplayFor(x => x.Nome)</h1>
 <h2>Dados do local</h2>
 <dt>
-    @foreach(var teste in Model.Itens)
+    @foreach(var item in Model.Itens)
     {
-        <dl>Item: @teste.Nome</dl>
-        <dl>Valor: @teste.Preco</dl>
+        <dl>Item: @item.Nome</dl>
+        <dl>Valor: @item.Preco</dl>
     }
 </dt>
 <div>

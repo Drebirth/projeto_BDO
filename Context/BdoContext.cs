@@ -22,7 +22,10 @@ namespace projetoBDO.Context
             modelBuilder.Entity<Item>()
             .Property(x => x.SpotId)
             .ValueGeneratedNever();
+
+        
         }
+        
 
     }
 }

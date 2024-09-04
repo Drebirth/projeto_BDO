@@ -1,0 +1,14 @@
+@model projetoBDO.Entities.local.Local
+
+@{
+    ViewData["Title"] = "Editando local de grind";
+}
+
+<form asp-action="Edit" method="post">
+    <div class="container">
+        <label asp-for="Nome">
+            <input type="text" asp-for="Nome" />
+        </label>
+    </div>
+    <button type="submit" >Editar</button>
+</form>

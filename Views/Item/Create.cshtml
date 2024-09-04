@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Adicionar Item";
 }
-
+<h1>Inclusão de itens</h1>
 <div class="container">
     <form asp-action="Create" method="post" >
         <label for="Nome">Nome Item
@@ -19,4 +19,5 @@
         </div>
     </form>
 </div>
+<a asp-controller="Local" asp-action="Index">Voltar</a>
 

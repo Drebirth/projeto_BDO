@@ -49,6 +49,31 @@ namespace projetoBDO.Controllers.itemController
             return View(item);
         }
 
+        public IActionResult Edit(long id)
+        {
+            var item = _bdoContext.Itens.Find(id);
+            if(item == null){
+                return NotFound();
+            }
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Item item)
+        {
+            var itemAtt = _bdoContext.Itens.Find(item.Id);
+            itemAtt.Nome = item.Nome;
+            itemAtt.Preco = item.Preco;
+            if(ModelState.IsValid)
+            {
+                //itemAtt = item;
+                _bdoContext.Itens.Update(itemAtt);
+                _bdoContext.SaveChanges();
+                return RedirectToAction("Index", new { id = item.Id });
+            }
+            return View(item);
+        }
+
         
     }
 }

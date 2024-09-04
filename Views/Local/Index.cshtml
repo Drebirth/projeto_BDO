@@ -5,7 +5,7 @@
 }
 
 <div class="container">
-    <h1>Spots</h1>
+    <h1>Locais de grind</h1>
     <a asp-action="Create">Adicionar Spot</a>
 </div>
 
@@ -28,6 +28,8 @@
                 <a asp-controller="Item" asp-action="Create" asp-route-id='@spot.Id'> Adicionar Itens</a>
                 <a asp-controller="Item" asp-action="Index" asp-route-id='@spot.Id'>Lista de itens</a>
                 <a asp-controller="Local" asp-action="Details" asp-route-id='@spot.Id'>Detalhes do Spot</a>
+                <a asp-controller="Local" asp-action="Edit" asp-route-id='@spot.Id'>Editar Spot</a>
+                <a asp-controller="Local" asp-action="Delete" asp-route-id='@spot.Id'>Deletar</a>
             </td>
         </tr>
         }

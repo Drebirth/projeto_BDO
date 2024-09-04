@@ -1,0 +1,14 @@
+@model projetoBDO.Entities.local.Local
+
+@{
+    ViewData["Title"] = "Deletando spots";
+}
+
+<h1>Deseja excluir o spot abaixo?</h1>
+<form asp-action="Delete">
+
+<label >@Html.DisplayNameFor(x => x.Nome)</label>
+<label> @Html.DisplayFor(x => x.Nome)</label>
+
+<button type="submit">Deleta</button>
+</form>
