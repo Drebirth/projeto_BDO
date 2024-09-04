@@ -7,11 +7,12 @@
 <h1>Inclusão de itens</h1>
 <div class="container">
     <form asp-action="Create" method="post" >
+        <div asp-validation-summary="All" class="text-danger"></div>
         <label for="Nome">Nome Item
             <input type="text" asp-for="Nome" class="form-control" />
         </label>
         <label for="Preco">Preço do Item
-            <input type="text" asp-for="Preco" />
+            <input type="number" asp-for="Preco" />
         </label>
         
         <div>

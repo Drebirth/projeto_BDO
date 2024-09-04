@@ -7,6 +7,7 @@ using projetoBDO.Entities.item;
 using projetoBDO.Entities.local;
 using projetoBDO.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace projetoBDO.Controllers.itemController
 {
@@ -21,8 +22,6 @@ namespace projetoBDO.Controllers.itemController
 
         
         public IActionResult Index(long id){
-            
-           
             var lista = _bdoContext.Itens.ToList().Where(x => x.SpotId == id);
             var local = _bdoContext.Spots.Find(id);
             return View(lista);
@@ -36,6 +35,10 @@ namespace projetoBDO.Controllers.itemController
         public IActionResult Create(Item item, long id)
         {            
             var teste = _bdoContext.Spots.Find(id);
+            if(item.Preco < 0)
+            {
+                ModelState.AddModelError("Preco","O Preco informado não pode ser menor que 0");
+            }
             Item i = new Item();
             if(ModelState.IsValid)
             {
@@ -69,7 +72,8 @@ namespace projetoBDO.Controllers.itemController
                 //itemAtt = item;
                 _bdoContext.Itens.Update(itemAtt);
                 _bdoContext.SaveChanges();
-                return RedirectToAction("Index", new { id = item.Id });
+                return RedirectToAction("Index","LocalController");
+                //return RedirectToAction("Index","LocalController", new { id = item.Id });
             }
             return View(item);
         }
