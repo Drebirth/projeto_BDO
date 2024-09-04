@@ -31,7 +31,6 @@ namespace projetoBDO.Controllers.localController
         [HttpPost]
         public IActionResult Create(Local local)
         {
-          
             if(ModelState.IsValid)
             {
                 _bdoContext.Spots.Add(local);
