@@ -8,6 +8,7 @@ using projetoBDO.Entities.local;
 using projetoBDO.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Authorization;
 
 namespace projetoBDO.Controllers.itemController
 {

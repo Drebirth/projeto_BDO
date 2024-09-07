@@ -1,14 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using projetoBDO.Entities.local;
 using projetoBDO.Entities.item;
+using projetoBDO.Entities.local;
 
 namespace projetoBDO.Context
 {
-    public class BdoContext : DbContext
+    public class BdoContext : IdentityDbContext
     {
         public BdoContext(DbContextOptions<BdoContext> options) : base(options){ }
 
@@ -17,14 +17,26 @@ namespace projetoBDO.Context
 
         public DbSet<Item> Itens { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+       /* protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Item>()
             .Property(x => x.SpotId)
             .ValueGeneratedNever();
 
         
+        }*/
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(login => new { login.LoginProvider, login.ProviderKey });
+            
+            modelBuilder.Entity<Item>()
+            .Property(x => x.SpotId)
+            .ValueGeneratedNever();
         }
+            
         
 
     }
