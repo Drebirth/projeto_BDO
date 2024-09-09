@@ -12,9 +12,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace projetoBDO.Controllers.itemController
 {
+    
+    [Authorize]
     public class ItemController: Controller
     {
-        
         private readonly BdoContext _bdoContext;
 
         public ItemController(BdoContext bdoContext){

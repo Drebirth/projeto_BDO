@@ -10,6 +10,8 @@ using projetoBDO.Entities.local;
 
 namespace projetoBDO.Controllers.localController
 {
+    
+    [Authorize]
     public class LocalController : Controller
     {
         private readonly BdoContext _bdoContext;

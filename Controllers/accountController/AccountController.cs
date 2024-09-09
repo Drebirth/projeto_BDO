@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using projetoBDO.Models;
 
 namespace projetoBDO.Controllers.accountController
@@ -47,6 +48,42 @@ namespace projetoBDO.Controllers.accountController
                 }
             }
             return View(model);
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel login)
+        {
+            if(ModelState.IsValid)
+            {
+                var result = await signInManager.PasswordSignInAsync(login.Usuario, 
+                    login.Password,login.RememberMe, false);
+
+            if(result.Succeeded)
+            {
+                return RedirectToAction("index","home");
+            }
+                ModelState.AddModelError(string.Empty,"Login inválido");
+            }
+            return View(login);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index","home");
+        }
+
+        [HttpGet]
+        [Route("/Account/AccessDenied")]
+        public ActionResult AccessDenied()
+        {
+            return View();
         }
         
     }
