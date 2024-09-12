@@ -3,20 +3,20 @@
 
     @if(SignInManager.IsSignedIn(User))
     {
-        <ul class="nav-item">
+        <ul class="nav-link active" >
             <form method="post" asp-controller="account" asp-action="logout">
                 <button type="submit" style="width: auto;"
-                    class="nav-link btn btn-link py-0">
-                    Logout @User.Identity.Name
+                    class="btn btn-outline-info">
+                    Sair @User.Identity.Name
                     </button>
             </form>
         </ul>
     }
-    else
+    <!--else
     {
         <ul class="nav-item">
             <a class="nav-link" asp-controller="account" asp-action="register">
-                Registri-se
+                Registre-se
             </a>
         </ul>
         <ul class="nav-item">
@@ -24,4 +24,4 @@
                 Login
             </a>
         </ul>
-    }
+    } -->

@@ -49,7 +49,7 @@ namespace projetoBDO.Controllers.itemController
                  i.Spot = teste;
                 _bdoContext.Itens.Add(i);
                 _bdoContext.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index), "Local");
             }
             return View(item);
         }
@@ -74,7 +74,7 @@ namespace projetoBDO.Controllers.itemController
                 //itemAtt = item;
                 _bdoContext.Itens.Update(itemAtt);
                 _bdoContext.SaveChanges();
-                return RedirectToAction("Index","LocalController");
+                return RedirectToAction(nameof(Index), "Local");
                 //return RedirectToAction("Index","LocalController", new { id = item.Id });
             }
             return View(item);
