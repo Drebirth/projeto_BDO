@@ -6,6 +6,7 @@
 
 <h1>Seus personagens</h1>
 
+<button> <a asp-action="Create">Criar novo personagem</a></button>
 <table class="table">
     <thead>
         <tr>
@@ -29,6 +30,7 @@
                 <td>@Html.DisplayFor(model => personagem.Level)</td>
                 <td>
                     <a asp-action="Delete" asp-route-id="@personagem.Id">Deletar</a>
+                    <a asp-action="Edit" asp-route-id="@personagem.Id">Editar Personagem</a>
                 </td>
             </tr>
         }

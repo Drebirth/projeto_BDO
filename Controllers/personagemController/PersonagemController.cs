@@ -48,6 +48,33 @@ namespace projetoBDO.Controllers.personagemController
             //return View(personagem);
         }
 
+        public IActionResult Edit(long id){
+            var personagem = _bdoContext.Personagens.Find(id);
+            if(personagem == null){
+                return NotFound();
+            }
+            return View(personagem);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Personagem personagem)
+        {
+            var personagemEditado = _bdoContext.Personagens.Find(personagem.Id);
+            personagemEditado.Nome = personagem.Nome;
+            personagemEditado.Classe = personagem.Classe;
+            personagemEditado.PA = personagem.PA;
+            personagem.DP = personagem.DP;
+            personagem.Level = personagem.Level;
+           // if(ModelState.IsValid)
+            //{
+                
+                _bdoContext.Personagens.Update(personagemEditado);
+                _bdoContext.SaveChanges();
+                return RedirectToAction("Index");
+            //}
+            //return View(personagem);
+        }
+
         public IActionResult Delete(long id)
         {
             var usuario = _bdoContext.Personagens.Find(id);
