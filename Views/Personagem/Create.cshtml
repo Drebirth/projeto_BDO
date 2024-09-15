@@ -1,0 +1,31 @@
+@model projetoBDO.Entities.personagem.Personagem
+
+@{
+    ViewData["Title"] = "Criação de personagem";
+}
+
+<form asp-action="Create" method="post">
+    <div>
+        <div>
+            <label for="">Nome</label>
+            <input asp-for="Nome"/>
+        </div>
+        <div>
+            <label for="">Classe</label>
+            <input asp-for="Classe"/>
+        </div>
+        <div>
+            <label for="">PA</label>
+            <input asp-for="PA"/>
+        </div>
+        <div>
+            <label for="">DP</label>
+            <input asp-for="DP"/>
+        </div>
+        <div>
+            <label for="">Level</label>
+            <input asp-for="Level"/>
+        </div>
+        <button type="submit">Salvar Personagem</button>
+    </div>
+</form>

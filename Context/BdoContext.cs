@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using projetoBDO.Entities.item;
 using projetoBDO.Entities.local;
+using projetoBDO.Entities.personagem;
 
 namespace projetoBDO.Context
 {
@@ -16,6 +17,8 @@ namespace projetoBDO.Context
         public DbSet<Local> Spots { get; set; }
 
         public DbSet<Item> Itens { get; set; }
+
+        public DbSet<Personagem> Personagens { get; set; }
 
        /* protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
