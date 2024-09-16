@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using projetoBDO.Entities.grind;
 using projetoBDO.Entities.item;
 using projetoBDO.Entities.local;
 using projetoBDO.Entities.personagem;
@@ -19,6 +20,8 @@ namespace projetoBDO.Context
         public DbSet<Item> Itens { get; set; }
 
         public DbSet<Personagem> Personagens { get; set; }
+
+        public DbSet<Grind> Grinds { get; set; }
 
        /* protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

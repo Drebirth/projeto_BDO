@@ -15,6 +15,6 @@ namespace projetoBDO.Entities.personagem
         public int DP { get; set; }  
         public int Level { get; set; }
 
-        public string usuario { get; set; }
+        public string User { get; set; }
     }
 }

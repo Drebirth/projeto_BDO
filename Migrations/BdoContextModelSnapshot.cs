@@ -220,6 +220,42 @@ namespace projetoBDO.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("projetoBDO.Entities.grind.Grind", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("PersonagemId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("SpotId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("User")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("ValorTotal")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonagemId");
+
+                    b.HasIndex("SpotId");
+
+                    b.ToTable("Grinds");
+                });
+
             modelBuilder.Entity("projetoBDO.Entities.item.Item", b =>
                 {
                     b.Property<long>("Id")
@@ -277,6 +313,9 @@ namespace projetoBDO.Migrations
                     b.Property<int>("DP")
                         .HasColumnType("int");
 
+                    b.Property<long?>("GrindId")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
@@ -287,11 +326,13 @@ namespace projetoBDO.Migrations
                     b.Property<int>("PA")
                         .HasColumnType("int");
 
-                    b.Property<string>("usuario")
+                    b.Property<string>("User")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GrindId");
 
                     b.ToTable("Personagens");
                 });
@@ -347,6 +388,23 @@ namespace projetoBDO.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("projetoBDO.Entities.grind.Grind", b =>
+                {
+                    b.HasOne("projetoBDO.Entities.personagem.Personagem", "Personagem")
+                        .WithMany()
+                        .HasForeignKey("PersonagemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("projetoBDO.Entities.local.Local", "Spot")
+                        .WithMany()
+                        .HasForeignKey("SpotId");
+
+                    b.Navigation("Personagem");
+
+                    b.Navigation("Spot");
+                });
+
             modelBuilder.Entity("projetoBDO.Entities.item.Item", b =>
                 {
                     b.HasOne("projetoBDO.Entities.local.Local", "Spot")
@@ -356,6 +414,18 @@ namespace projetoBDO.Migrations
                         .IsRequired();
 
                     b.Navigation("Spot");
+                });
+
+            modelBuilder.Entity("projetoBDO.Entities.personagem.Personagem", b =>
+                {
+                    b.HasOne("projetoBDO.Entities.grind.Grind", null)
+                        .WithMany("Personagens")
+                        .HasForeignKey("GrindId");
+                });
+
+            modelBuilder.Entity("projetoBDO.Entities.grind.Grind", b =>
+                {
+                    b.Navigation("Personagens");
                 });
 
             modelBuilder.Entity("projetoBDO.Entities.local.Local", b =>

@@ -25,7 +25,7 @@ namespace projetoBDO.Controllers.personagemController
         public IActionResult Index()
         {
             var logado = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
-            var personagens = _bdoContext.Personagens.ToList().Where(x => x.usuario == logado);
+            var personagens = _bdoContext.Personagens.ToList().Where(x => x.User == logado);
             return View(personagens);
         }
 
@@ -37,10 +37,10 @@ namespace projetoBDO.Controllers.personagemController
         [HttpPost]
         public IActionResult Create(Personagem personagem)
         {
-            string dono = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+            string usuario = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
           //  if(ModelState.IsValid)
             //{
-                personagem.usuario = dono;
+                personagem.User = usuario;
                 _bdoContext.Personagens.Add(personagem);
                 _bdoContext.SaveChanges();
                 return RedirectToAction("Index");
