@@ -5,10 +5,15 @@
 }
 
 <form asp-action="Edit" method="post">
-    <div class="container">
-        <label asp-for="Nome">
-            <input type="text" asp-for="Nome" />
-        </label>
+    <div class="row mb-3">
+        <div>
+            <label asp-for="Nome">Nome do Spot</label>
+                <input type="text" asp-for="Nome" />
+            
+        </div>
     </div>
-    <button type="submit" >Editar</button>
+
+    <button type="submit" class="btn btn-primary" >Editar</button>
+    <a asp-action="Index" class="btn btn-outline-primary">Voltar</a>
 </form>
+

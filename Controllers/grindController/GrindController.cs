@@ -47,6 +47,7 @@ namespace projetoBDO.Controllers.grindController
             grind.Spot =  mapa;
             grind.Personagens = personagens;
             grind.Itens = itens.ToList();
+            grind.DateTime = DateTime.Now;
             return View(grind);
         }
 
@@ -62,6 +63,7 @@ namespace projetoBDO.Controllers.grindController
             g.User = user;
             g.Personagem = personagem.First();
             g.Spot = mapa; 
+            g.DateTime = grind.DateTime;
             double valor = 0;
             //g.Quantidades.Add(grind.Quantidade);
             //g.Quantidade = grind.Quantidade;

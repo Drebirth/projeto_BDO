@@ -6,7 +6,7 @@
 
 <h1>Jornada</h1>
 <form asp-action="Create" method="post">
-        <div>
+        <div class="form-group">
             <label asp-for="Personagem" class="form-label">Personagem</label>
             <input asp-for="Personagem" class="form-control" list="personagens"  placeholder="Qual personagem" />
            <datalist id="personagens">
@@ -16,22 +16,26 @@
                 }
             </datalist> 
         </div>
-        <div>
+        <div class="form-group">
             <label  class="form-label">Data</label>
-            <input type="date" class="form-control"/>
+            <input type="date" asp-for="DateTime" class="form-control" placeholder="A data do grind"/>
         </div>
-        <div>
+        <div class="form-group">
             @foreach(var itens in Model.Itens){
                 <label class="form-label" asp-for="Itens">Itens</label>
-                <input class="form-control" asp-for="Itens" value="@itens.Nome"/>
+                <input class="form-control" asp-for="Itens" value="@itens.Nome" disabled/>
                 
                 <label class="form-label" asp-for="Itens">Valor</label>
-                <input class="form-control" asp-for="Itens" value="@itens.Preco"/>
+                <input class="form-control" asp-for="Itens" value="@itens.Preco" disabled/>
 
                 <label class="form-label">Quantitdade</label>
                 <input class="form-control" asp-for="Quantidades"/>
             }
         </div>
-        <button type="submit">Salvar</button>
-    </div>
+        <div class="botao">
+            <button type="submit" style="width: 60%;" class="btn btn-primary">Salvar</button>
+            
+        </div>
+    
 </form>
+<a asp-action="Index" classe="btn btn-outliner-primary">Voltar</a>
