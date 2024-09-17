@@ -9,7 +9,7 @@
         <div>
             <label asp-for="Personagem" class="form-label">Personagem</label>
             <input asp-for="Personagem" class="form-control" list="personagens"  placeholder="Qual personagem" />
-           <datalist asp-for="Personagem"  id="personagens">
+           <datalist id="personagens">
                 @foreach(var personagem in Model.Personagens)
                 {
                     <option value="@personagem.Nome"></option>
@@ -19,6 +19,18 @@
         <div>
             <label  class="form-label">Data</label>
             <input type="date" class="form-control"/>
+        </div>
+        <div>
+            @foreach(var itens in Model.Itens){
+                <label class="form-label" asp-for="Itens">Itens</label>
+                <input class="form-control" asp-for="Itens" value="@itens.Nome"/>
+                
+                <label class="form-label" asp-for="Itens">Valor</label>
+                <input class="form-control" asp-for="Itens" value="@itens.Preco"/>
+
+                <label class="form-label">Quantitdade</label>
+                <input class="form-control" asp-for="Quantidades"/>
+            }
         </div>
         <button type="submit">Salvar</button>
     </div>

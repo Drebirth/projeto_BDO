@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using projetoBDO.Context;
 
@@ -11,9 +12,11 @@ using projetoBDO.Context;
 namespace projetoBDO.Migrations
 {
     [DbContext(typeof(BdoContext))]
-    partial class BdoContextModelSnapshot : ModelSnapshot
+    [Migration("20240917020540_DBv2.0003")]
+    partial class DBv20003
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

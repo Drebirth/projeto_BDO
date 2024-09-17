@@ -13,12 +13,15 @@ namespace projetoBDO.Entities.grind
     {
         public long Id { get; set; }    
         public Local? Spot { get; set; }
+        public List<Item> Itens { get; set; }
         public Personagem Personagem { get; set; }
 
         public List<Personagem>? Personagens { get; set; }
         
         public string User { get; set; }
         public int Quantidade { get; set; }
+
+        public List<int> Quantidades { get; set; }
         public double ValorTotal { get; set; }
         [DataType(DataType.Date)]
         public DateTime DateTime { get; set; }
