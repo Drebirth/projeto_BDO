@@ -231,19 +231,13 @@ namespace projetoBDO.Migrations
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PersonagemId")
-                        .HasColumnType("int");
-
-                    b.Property<long>("PersonagemId1")
+                    b.Property<long>("PersonagemId")
                         .HasColumnType("bigint");
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.Property<int>("SpotId")
-                        .HasColumnType("int");
-
-                    b.Property<long?>("SpotId1")
+                    b.Property<long?>("SpotId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("User")
@@ -255,9 +249,9 @@ namespace projetoBDO.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PersonagemId1");
+                    b.HasIndex("PersonagemId");
 
-                    b.HasIndex("SpotId1");
+                    b.HasIndex("SpotId");
 
                     b.ToTable("Grinds");
                 });
@@ -406,13 +400,13 @@ namespace projetoBDO.Migrations
                 {
                     b.HasOne("projetoBDO.Entities.personagem.Personagem", "Personagem")
                         .WithMany()
-                        .HasForeignKey("PersonagemId1")
+                        .HasForeignKey("PersonagemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("projetoBDO.Entities.local.Local", "Spot")
                         .WithMany()
-                        .HasForeignKey("SpotId1");
+                        .HasForeignKey("SpotId");
 
                     b.Navigation("Personagem");
 

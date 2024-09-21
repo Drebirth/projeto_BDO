@@ -58,7 +58,6 @@ namespace projetoBDO.Controllers.grindController
             var user = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
             var mapa = _bdoContext.Spots.Find(id);
             var personagem = _bdoContext.Personagens.ToList().Where(x => x.Nome == grind.Personagem.Nome);
-            //var personagem = _bdoContext.Personagens.Find((long)grind.PersonagemId);
             var item = _bdoContext.Itens.ToList().Where(x => x.SpotId == id);
             double valor = 0;
           
@@ -73,7 +72,7 @@ namespace projetoBDO.Controllers.grindController
             {   
                 valor += grind.Itens[i].Quantidade * grind.Itens[i].Preco;
                 g.Quantidade += grind.Itens[i].Quantidade;
-            }
+            }                                                                                                                                         
             g.ValorTotal = valor;
             
             _bdoContext.Grinds.Add(g);

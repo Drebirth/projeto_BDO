@@ -17,12 +17,10 @@ namespace projetoBDO.Entities.grind
         [DataType(DataType.Date)]
         public DateTime DateTime { get; set; }
 
-        public int SpotId { get; set; }
         public Local? Spot { get; set; }
         
         public List<Item> Itens { get; set; } = new List<Item>();
         
-        public int PersonagemId { get; set; }
         public Personagem Personagem { get; set; }
 
         public List<Personagem>? Personagens { get; set; }
