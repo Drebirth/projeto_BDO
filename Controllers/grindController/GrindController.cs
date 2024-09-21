@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using projetoBDO.Context;
 using projetoBDO.Entities.grind;
 using projetoBDO.Entities.personagem;
+using projetoBDO.Models;
 
 namespace projetoBDO.Controllers.grindController
 {
@@ -50,36 +51,35 @@ namespace projetoBDO.Controllers.grindController
             grind.DateTime = DateTime.Now;
             return View(grind);
         }
-
+        
         [HttpPost]
         public IActionResult Create(Grind grind, long id)
         {
             var user = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
             var mapa = _bdoContext.Spots.Find(id);
             var personagem = _bdoContext.Personagens.ToList().Where(x => x.Nome == grind.Personagem.Nome);
+            //var personagem = _bdoContext.Personagens.Find((long)grind.PersonagemId);
             var item = _bdoContext.Itens.ToList().Where(x => x.SpotId == id);
             double valor = 0;
+          
 
             Grind g = new Grind();
             g.User = user;
-            g.Personagem = personagem.First();          
+            g.Personagem = personagem.First();
             g.Spot = mapa; 
             g.DateTime = grind.DateTime;
-            g.Quantidades = grind.Quantidades;
-            g.Itens = item.ToList();
             
-
-            for (int i = 0; i < g.Itens.Count(); i++)
+            for (int i = 0; i < grind.Itens.Count(); i++)
             {   
-                valor += grind.Quantidades[i] * g.Itens[i].Preco;
-                g.Quantidade += grind.Quantidades[i];
+                valor += grind.Itens[i].Quantidade * grind.Itens[i].Preco;
+                g.Quantidade += grind.Itens[i].Quantidade;
             }
             g.ValorTotal = valor;
             
             _bdoContext.Grinds.Add(g);
             _bdoContext.SaveChanges();
             return RedirectToAction("index"); 
-            
+          
         }
     }
 }

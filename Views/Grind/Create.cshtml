@@ -21,15 +21,18 @@
             <input type="date" asp-for="DateTime" class="form-control" placeholder="A data do grind"/>
         </div>
         <div class="form-group">
-            @foreach(var itens in Model.Itens){
-                <label class="form-label" asp-for="Itens" >Itens</label>
-                <input class="form-control" asp-for="Itens" value="@itens.Nome" disabled/>
+            @for(int i =0; i < Model.Itens.Count; i++){
+                <input class="form-control" asp-for="Itens[i].Id" hidden/>
+                <label class="form-label" asp-for="Itens">Item</label>
+                <input class="form-control" asp-for="Itens[i].Nome" value="@Model.Itens[i].Nome" />
                 
                 <label class="form-label" asp-for="Itens">Valor</label>
-                <input class="form-control" asp-for="Itens" value="@itens.Preco" disabled/>
-
+                <input class="form-control" asp-for="Itens[i].Preco" value="@Model.Itens[i].Preco" />
+                <div asp-validation="Quantidades" class="text-danger"></div>
                 <label class="form-label">Quantitdade</label>
-                <input class="form-control" asp-for="Quantidades"/>
+                <input class="form-control" asp-for="Itens[i].Quantidade" value="@Model.Itens[i].Quantidade"/>
+                <input class="form-control" asp-for="Itens[i].SpotId" hidden/>
+                
             }
         </div>
         <div class="botao">

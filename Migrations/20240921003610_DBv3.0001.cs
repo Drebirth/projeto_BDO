@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace projetoBDO.Migrations
 {
     /// <inheritdoc />
-    public partial class DBb20001 : Migration
+    public partial class DBv30001 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -170,6 +170,31 @@ namespace projetoBDO.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Grinds",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SpotId = table.Column<int>(type: "int", nullable: false),
+                    SpotId1 = table.Column<long>(type: "bigint", nullable: true),
+                    PersonagemId = table.Column<int>(type: "int", nullable: false),
+                    PersonagemId1 = table.Column<long>(type: "bigint", nullable: false),
+                    User = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Quantidade = table.Column<int>(type: "int", nullable: false),
+                    ValorTotal = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Grinds", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Grinds_Spots_SpotId1",
+                        column: x => x.SpotId1,
+                        principalTable: "Spots",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Itens",
                 columns: table => new
                 {
@@ -177,40 +202,24 @@ namespace projetoBDO.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Preco = table.Column<double>(type: "float", nullable: false),
-                    SpotId = table.Column<long>(type: "bigint", nullable: false)
+                    Quantidade = table.Column<int>(type: "int", nullable: false),
+                    SpotId = table.Column<long>(type: "bigint", nullable: false),
+                    GrindId = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Itens", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Itens_Grinds_GrindId",
+                        column: x => x.GrindId,
+                        principalTable: "Grinds",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Itens_Spots_SpotId",
                         column: x => x.SpotId,
                         principalTable: "Spots",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Grinds",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SpotId = table.Column<long>(type: "bigint", nullable: true),
-                    PersonagemId = table.Column<long>(type: "bigint", nullable: false),
-                    User = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Quantidade = table.Column<int>(type: "int", nullable: false),
-                    ValorTotal = table.Column<double>(type: "float", nullable: false),
-                    DateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Grinds", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Grinds_Spots_SpotId",
-                        column: x => x.SpotId,
-                        principalTable: "Spots",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -277,14 +286,19 @@ namespace projetoBDO.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Grinds_PersonagemId",
+                name: "IX_Grinds_PersonagemId1",
                 table: "Grinds",
-                column: "PersonagemId");
+                column: "PersonagemId1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Grinds_SpotId",
+                name: "IX_Grinds_SpotId1",
                 table: "Grinds",
-                column: "SpotId");
+                column: "SpotId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Itens_GrindId",
+                table: "Itens",
+                column: "GrindId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Itens_SpotId",
@@ -297,9 +311,9 @@ namespace projetoBDO.Migrations
                 column: "GrindId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Grinds_Personagens_PersonagemId",
+                name: "FK_Grinds_Personagens_PersonagemId1",
                 table: "Grinds",
-                column: "PersonagemId",
+                column: "PersonagemId1",
                 principalTable: "Personagens",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -309,7 +323,7 @@ namespace projetoBDO.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Grinds_Personagens_PersonagemId",
+                name: "FK_Grinds_Personagens_PersonagemId1",
                 table: "Grinds");
 
             migrationBuilder.DropTable(

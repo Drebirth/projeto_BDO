@@ -13,9 +13,16 @@ namespace projetoBDO.Entities.grind
     public class Grind
     {
         public long Id { get; set; }    
+        
+        [DataType(DataType.Date)]
+        public DateTime DateTime { get; set; }
+
+        public int SpotId { get; set; }
         public Local? Spot { get; set; }
         
-        public List<Item> Itens { get; set; }
+        public List<Item> Itens { get; set; } = new List<Item>();
+        
+        public int PersonagemId { get; set; }
         public Personagem Personagem { get; set; }
 
         public List<Personagem>? Personagens { get; set; }
@@ -23,9 +30,7 @@ namespace projetoBDO.Entities.grind
         public string User { get; set; }
         public int Quantidade { get; set; }
 
-        public List<int> Quantidades { get; set; }
         public double ValorTotal { get; set; }
-        [DataType(DataType.Date)]
-        public DateTime DateTime { get; set; }
+      
     }
 }

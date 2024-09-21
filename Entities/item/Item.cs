@@ -16,15 +16,11 @@ namespace projetoBDO.Entities.item
         [Required(ErrorMessage = "O campo Preco não pode ser vazio!")]
         public double Preco { get; set; }
 
+        public int Quantidade { get; set; }
+
         public long SpotId { get; set; }
     
         public Local? Spot { get; set; }
 
-       /* public Item( string nome, double preco, Local spot)
-        {
-            Nome = nome;
-            Preco = preco;
-            Spot = spot;
-        }*/
     }
 }
