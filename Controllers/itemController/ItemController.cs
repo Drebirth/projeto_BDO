@@ -37,9 +37,9 @@ namespace projetoBDO.Controllers.itemController
         public IActionResult Create(Item item, long id)
         {            
             var teste = _bdoContext.Spots.Find(id);
-            if(item.Preco < 0)
+            if(item.Preco <= 0)
             {
-                ModelState.AddModelError("Preco","O Preco informado não pode ser menor que 0");
+                ModelState.AddModelError("Preco","O valor informado não pode ser 0 ou menor");
             }
             Item i = new Item();
             if(ModelState.IsValid)

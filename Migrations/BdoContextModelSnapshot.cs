@@ -234,7 +234,7 @@ namespace projetoBDO.Migrations
                     b.Property<long>("PersonagemId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("Quantidade")
+                    b.Property<int?>("Quantidade")
                         .HasColumnType("int");
 
                     b.Property<long?>("SpotId")
@@ -244,7 +244,7 @@ namespace projetoBDO.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("ValorTotal")
+                    b.Property<double?>("ValorTotal")
                         .HasColumnType("float");
 
                     b.HasKey("Id");

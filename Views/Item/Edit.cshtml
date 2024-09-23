@@ -6,13 +6,16 @@
 
 <h1>Pagina de edição do Item</h1>
 <form asp-action="Edit">
-    <label>
-        @Html.DisplayNameFor(x => x.Nome)
+    <div class="row mb-3">
+    <label>@Html.DisplayNameFor(x => x.Nome)</label>
         <input type="text" asp-for="Nome" />
-    </label>
-    <label>
-        @Html.DisplayNameFor(x => x.Preco)
+    </div>
+    <div class="row mb-3">
+    <label>@Html.DisplayNameFor(x => x.Preco)</label>
         <input type="text" asp-for="Preco" />
-    </label>
-    <button type="submit">Salvar</button>
+    </div>
+    <div class="botao">
+        <button type="submit" class="btn btn-primary" style="width: 60%;">Salvar</button>
+    </div>
 </form>
+<a asp-controller="Local" asp-action="Index" class="btn btn-secondary">Voltar</a>

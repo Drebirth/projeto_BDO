@@ -19,16 +19,20 @@ namespace projetoBDO.Entities.grind
 
         public Local? Spot { get; set; }
         
-        public List<Item> Itens { get; set; } = new List<Item>();
+        [Required]
+        public List<Item>? Itens { get; set; } = new List<Item>();
         
-        public Personagem Personagem { get; set; }
+        [Required(ErrorMessage = "Personagem é requirido")]
+        public Personagem? Personagem { get; set; }
 
+        [Required(ErrorMessage = "Personagem é requirido")]
         public List<Personagem>? Personagens { get; set; }
         
-        public string User { get; set; }
-        public int Quantidade { get; set; }
+        [Required]
+        public string? User { get; set; }
+        public int? Quantidade { get; set; }
 
-        public double ValorTotal { get; set; }
+        public double? ValorTotal { get; set; }
       
     }
 }

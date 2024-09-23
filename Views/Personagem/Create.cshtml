@@ -5,29 +5,30 @@
 }
 
 <form asp-action="Create" method="post">
-    <div>
-        <div>
-            <label for="">Nome</label>
-            <input asp-for="Nome"/>
+        <input asp-for="User" value="@User" hidden/>
+        <div class="row mb-3">
+            <label class="form-label">Nome</label>
+            <input class="form-control" asp-for="Nome"/>
         </div>
-        <div>
-            <label for="">Classe</label>
-            <input asp-for="Classe"/>
+        <div class="row mb-3">
+            <label class="form-label">Classe</label>
+            <input class="form-control" asp-for="Classe"/>
         </div>
-        <div>
-            <label for="">PA</label>
-            <input asp-for="PA"/>
+        <div class="row mb-3">
+            <label class="form-label">PA</label>
+            <input class="form-control" asp-for="PA"/>
         </div>
-        <div>
-            <label for="">DP</label>
-            <input asp-for="DP"/>
+        <div class="row mb-3">
+            <label class="form-label">DP</label>
+            <input class="form-control" asp-for="DP"/>
         </div>
-        <div>
-            <label for="">Level</label>
-            <input asp-for="Level"/>
+        <div class="row mb-3">
+            <label class="form-label">Level</label>
+            <input class="form-control" asp-for="Level"/>
         </div>
-        <button type="submit">Salvar Personagem</button>
-    </div>
+        <div class="botao">
+            <button type="submit" class="btn btn-primary" style="width: 60%;">Salvar Personagem</button>
+        </div>
 </form>
 
-<button><a asp-action="Index">Voltar</a></button>
+<a asp-action="Index" class="btn btn-secondary">Voltar</a>

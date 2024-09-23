@@ -38,14 +38,14 @@ namespace projetoBDO.Controllers.personagemController
         public IActionResult Create(Personagem personagem)
         {
             string usuario = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
-          //  if(ModelState.IsValid)
-            //{
+          if(ModelState.IsValid)
+            {
                 personagem.User = usuario;
                 _bdoContext.Personagens.Add(personagem);
                 _bdoContext.SaveChanges();
                 return RedirectToAction("Index");
-           // }
-            //return View(personagem);
+            }
+            return View(personagem);
         }
 
         public IActionResult Edit(long id){

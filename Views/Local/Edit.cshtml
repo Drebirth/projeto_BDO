@@ -6,14 +6,13 @@
 
 <form asp-action="Edit" method="post">
     <div class="row mb-3">
-        <div>
-            <label asp-for="Nome">Nome do Spot</label>
-                <input type="text" asp-for="Nome" />
+            <label asp-for="Nome" class="form-label">Nome do Spot</label>
+                <input type="text" class="form-control" asp-for="Nome" />
             
-        </div>
     </div>
-
-    <button type="submit" class="btn btn-primary" >Editar</button>
-    <a asp-action="Index" class="btn btn-outline-primary">Voltar</a>
+    <div class="botao">
+    <button type="submit" class="btn btn-primary" style="width: 60%;" >Editar</button>
+    </div>
 </form>
+    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
 

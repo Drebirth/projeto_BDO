@@ -7,6 +7,8 @@
 <h1>Deseja realmente apagar o personagem ?</h1>
 
 <form asp-action="Delete" method="post">
-    <button type="submit">Sim</button>
-    <button><a asp-action="index">Não</a></button>
+    <div class="botao">
+    <button type="submit" class="btn btn-danger" style="width: 60%;">Sim</button>
+    </div>
+    <a asp-controller="Personagem" asp-action="index" class="btn btn-secondary">Voltar</a>
 </form>
