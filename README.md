@@ -10,8 +10,10 @@ Um projeto MVC desenvolvido utilizando ASP.NET, Entity framework identity e Boot
 
 Para roda em sua maquina é preciso ter instalado o .NET framework 8, que você pode está baixando neste link: [https://dotnet.microsoft.com/en-us/download]. 
 
-Necessário também ter  instalado o Microsoft SQL Manager Studio neste link: [https://learn.microsoft.com/pt-br/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16#download-ssms]
-e SQL EXPRESS [https://www.microsoft.com/pt-br/download/details.aspx?id=101064#:~:text=Microsoft%20SQL%20Server%202019%20Express%20%C3%A9%20uma%20edi%C3%A7%C3%A3o%20gratuita%20e&msockid=2dd9114e0a1366d327f505220b446719]
+Foi configurado para rodar localmente com banco de dados sqlite, no caso basta apenas utilizar comandos os comandos no terminal e realizar o update:
+
+dotnet ef migrations add "Nome-Migracao" 
+dotnet ef database update.
 
 
 ## Inicializar localmente

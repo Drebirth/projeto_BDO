@@ -32,7 +32,7 @@ namespace projetoBDO.Entities.grind
         public string? User { get; set; }
         public int? Quantidade { get; set; }
 
-        public double? ValorTotal { get; set; }
+        public decimal? ValorTotal { get; set; }
       
     }
 }
