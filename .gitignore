@@ -3,3 +3,5 @@ properties
 bin
 Migrations
 BancoTeste
+BancoTeste-shm
+BancoTeste-wal
