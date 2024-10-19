@@ -1,0 +1,14 @@
+@model projetoBDO.Entities.personagem.Personagem
+
+@{
+    ViewData["Title"] = "Deletando personagem";
+}
+
+<h1>Deseja realmente apagar o personagem ?</h1>
+
+<form asp-action="Delete" method="post">
+    <div class="botao">
+    <button type="submit" class="btn btn-danger" style="width: 60%;">Sim</button>
+    </div>
+    <a asp-controller="Personagem" asp-action="index" class="btn btn-secondary">Voltar</a>
+</form>

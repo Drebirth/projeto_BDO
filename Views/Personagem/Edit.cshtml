@@ -1,0 +1,33 @@
+@model projetoBDO.Entities.personagem.Personagem
+
+@{
+    ViewData["Title"] = "Editar personagem";
+}
+
+<form asp-action="Edit" method="post">
+
+        <div class="row mb-3">
+            <label class="form-label">Nome</label>
+            <input type="text" asp-for="Nome" class="form-control" />
+        </div>
+        <div class="row mb-3">
+            <label class="form-label">Classe</label>
+            <input class="form-control" type="text" asp-for="Classe">
+        </div>
+        <div class="row mb-3">
+            <label class="form-label">PA</label>
+            <input class="form-control" type="number" asp-for="PA" />
+        </div>
+        <div class="row mb-3">
+            <label class="form-label">DP</label>
+            <input class="form-control" type="number" asp-for="DP" />
+        </div>
+        <div class="row mb-3">
+            <label class="form-label">level</label>
+            <input class="form-control" type="number" asp-for="Level"/>
+        </div>
+        <div class="botao">
+            <button type="submit" class="btn btn-primary" style="width: 60%;" >Salvar</button>
+        </div>
+</form>
+<a asp-controller="Personagem" asp-action="Index" class="btn btn-secondary">Voltar</a>

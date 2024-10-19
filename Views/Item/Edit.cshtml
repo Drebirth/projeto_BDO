@@ -1,0 +1,21 @@
+@model projetoBDO.Entities.item.Item
+
+@{
+    ViewData["Title"] = "Editando Item";
+}
+
+<h1>Pagina de edição do Item</h1>
+<form asp-action="Edit">
+    <div class="row mb-3">
+    <label>@Html.DisplayNameFor(x => x.Nome)</label>
+        <input type="text" asp-for="Nome" />
+    </div>
+    <div class="row mb-3">
+    <label>@Html.DisplayNameFor(x => x.Preco)</label>
+        <input type="text" asp-for="Preco" />
+    </div>
+    <div class="botao">
+        <button type="submit" class="btn btn-primary" style="width: 60%;">Salvar</button>
+    </div>
+</form>
+<a asp-controller="Local" asp-action="Index" class="btn btn-secondary">Voltar</a>

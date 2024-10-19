@@ -1,0 +1,38 @@
+@model IEnumerable<projetoBDO.Entities.local.Local>
+
+@{
+    ViewData["Title"] = "Locais de grind";
+}
+
+<div class="container">
+    <h1>Locais de grind</h1>
+    <a asp-action="Create" class="btn btn-primary">Adicionar Spot</a>
+</div>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var spot in Model )
+        {
+        <tr>
+            <td>@Html.DisplayFor(model => spot.Id)</td>
+            <td>@Html.DisplayFor(model => spot.Nome)</td>
+            <td>
+                <a asp-controller="Item" asp-action="Create" class="btn btn-outline-primary" asp-route-id='@spot.Id'> Adicionar Itens</a>
+                <a asp-controller="Item" asp-action="Index" class="btn btn-outline-secondary" asp-route-id='@spot.Id'>Lista de itens</a>
+                <a asp-controller="Local" asp-action="Details" class="btn btn-outline-info" asp-route-id='@spot.Id'>Detalhes do Spot</a>
+                <a asp-controller="Local" asp-action="Edit" class="btn btn-outline-warning" asp-route-id='@spot.Id'>Editar Spot</a>
+                <a asp-controller="Local" asp-action="Delete" class="btn btn-outline-danger" asp-route-id='@spot.Id'>Deletar</a>
+                <a asp-controller="Grind" asp-action="Create" class="btn btn-primary" asp-route-id="@spot.Id">Adicionar grind</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

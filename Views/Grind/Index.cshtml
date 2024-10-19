@@ -1,0 +1,29 @@
+@model IEnumerable<projetoBDO.Entities.grind.Grind>
+
+@{
+    ViewData["Title"]="Diário de grind";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(x =>x.Spot)</th>
+            <th>@Html.DisplayNameFor(x => x.Personagem)</th> 
+            <th>Valor em Silver</th>
+            <th>Data</th>
+            <th>Quatidade total dos drops</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var grind in Model){
+            <tr>
+            
+                <td>@Html.DisplayFor(model => grind.Spot.Nome)</td>
+                <td>@Html.DisplayFor(model => grind.Personagem.Nome)</td>
+                <td>@Html.DisplayFor(model => grind.ValorTotal)</td> 
+                <td>@Html.DisplayFor(model => grind.DateTime)</td> 
+                <th>@Html.DisplayFor(model => grind.Quantidade)</th>
+            </tr>
+        }
+    </tbody>
+</table>

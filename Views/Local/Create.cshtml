@@ -1,0 +1,20 @@
+@model projetoBDO.Entities.local.Local
+
+@{
+    ViewData["Title"] = "Adicionando Spots";
+}
+
+<h1>Formulario para adiconar spots de grind</h1>
+
+<form asp-action="Create" method="post">
+    <div class="row mb-3">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <label class="form-label"> Nome do spot</label>
+        <input type="text" asp-for="Nome" class="form-control"/>
+    </div>
+    <!--<span asp-validation-for="Nome" class="text-danger"></span>-->
+    <div class="botao">
+        <button type="submit" style="width: 60%;" class="btn btn-primary">Salvar</button>
+    </div>
+</form>
+<a asp-action="Index" class="btn btn-secondary">Voltar</a>

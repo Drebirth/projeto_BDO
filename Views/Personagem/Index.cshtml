@@ -1,0 +1,42 @@
+@model IEnumerable<projetoBDO.Entities.personagem.Personagem>
+    
+@{
+    ViewData["Title"] ="Lista de personagens";
+}
+
+<h1>Seus personagens</h1>
+
+<a asp-action="Create" class="btn btn-primary">Criar novo personagem</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(x => x.Id)</th>
+            <th>@Html.DisplayNameFor(x => x.Nome)</th>
+            <th>@Html.DisplayNameFor(x => x.Classe)</th>
+            <th>@Html.DisplayNameFor(x => x.PA)</th>
+            <th>@Html.DisplayNameFor(x => x.DP)</th>
+            <th>@Html.DisplayNameFor(x => x.Level)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var personagem in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => personagem.Id)</td>
+                <td>@Html.DisplayFor(model => personagem.Nome)</td>
+                <td>@Html.DisplayFor(model => personagem.Classe)</td>
+                <td>@Html.DisplayFor(model => personagem.PA)</td>
+                <td>@Html.DisplayFor(model => personagem.DP)</td>
+                <td>@Html.DisplayFor(model => personagem.Level)</td>
+                <td>
+                    <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@personagem.Id">Deletar</a>
+                    <a asp-action="Edit" class="btn btn-outline-warning" asp-route-id="@personagem.Id">Editar Personagem</a>
+                    
+                </td>
+            </tr>
+        }
+    
+    </tbody>
+</table>
+
+

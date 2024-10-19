@@ -1,0 +1,37 @@
+@model IEnumerable<projetoBDO.Entities.item.Item>
+
+    @{
+        ViewData["Title"] = "Item de grind";
+    }
+
+<h1>Lista de Itens</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(x => x.Id)</th>
+            <th>@Html.DisplayNameFor(x => x.Nome)</th>
+            <th>@Html.DisplayNameFor(x => x.Preco)</th>
+           <!-- <th>@Html.DisplayNameFor(x => x.SpotId)</th>-->
+            <th>@Html.DisplayNameFor(x => x.Spot.Nome)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+        <tr>
+            <td>@Html.DisplayFor(model => item.Id)</td>
+            <td>@Html.DisplayFor(model => item.Nome)</td>
+            <td>@Html.DisplayFor(model => item.Preco)</td>
+           <!-- <td>@Html.DisplayFor(model => item.SpotId)</td>-->
+            <td>@Html.DisplayFor(model => item.Spot.Nome)</td>
+            <td>
+            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning">Editar Item</a>
+            </td/>
+        </tr>
+        
+        }
+        
+    </tbody>
+</table>
+<a asp-controller="Local" asp-action="Index" class="btn btn-secondary">Voltar</a>
