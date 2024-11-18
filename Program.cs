@@ -19,6 +19,7 @@ builder.Services.AddDbContext<BdoContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
         .AddEntityFrameworkStores<BdoContext>();
 
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 {
     options.Cookie.Name = "AspNetCore.Cookies";

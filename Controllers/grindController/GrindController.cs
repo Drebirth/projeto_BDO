@@ -54,8 +54,6 @@ namespace projetoBDO.Controllers.grindController
             return RedirectToAction("Create","Item");
            }
            else{
-            
-            
             Grind grind = new Grind();
             grind.Spot =  mapa;
             grind.Personagens = personagens.ToList();

@@ -1,7 +1,11 @@
 obj
-properties
 bin
 Migrations
 BancoTeste
 BancoTeste-shm
 BancoTeste-wal
+BancoTeste.db
+Bdo.db
+Bdo.db-shm
+Bdo.db-wal
+bdoDB
