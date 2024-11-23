@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using projetoBDO.Context;
 using projetoBDO.Entities.grind;
@@ -40,6 +42,20 @@ namespace projetoBDO.Controllers.grindController
             return View(grind);
         }
 
+/*
+        public IActionResult Create2(long id)
+        {
+            string logado = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+            var personagem = _bdoContext.Personagens.Find(id);
+            var spots = _bdoContext.Spots.ToList();
+            Grind grind = new Grind();
+            grind.Personagem = personagem;
+            grind.Spots = spots;
+            
+            return View(grind);
+        }
+        */
+        
         public IActionResult Create(long id)
         {        
             string logado = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
@@ -56,7 +72,7 @@ namespace projetoBDO.Controllers.grindController
            else{
             Grind grind = new Grind();
             grind.Spot =  mapa;
-            grind.Personagens = personagens.ToList();
+           // grind.Personagens = personagens.ToList();
             grind.Itens = itens.ToList();
             grind.DateTime = DateTime.Now;
             return View(grind);
@@ -69,7 +85,16 @@ namespace projetoBDO.Controllers.grindController
             Grind g = new Grind();
             var user = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
             var mapa = _bdoContext.Spots.Find(id);
-            var personagem = _bdoContext.Personagens.ToList().Where(x => x.Nome == grind.Personagem.Nome);
+            var personagems = _bdoContext.Personagens.ToList().Where(x => x.Nome == grind.PersonagemNome);
+            //var personagem = _bdoContext.Personagens.FromSql($"Select * from Personagens where {grind.Personagem.Nome} like '%Personagens.Nome%'");
+          
+                var personagem = personagems.FirstOrDefault();
+                grind.Personagem = personagem;
+                if(grind.Personagem == null)
+                {
+                    ModelState.AddModelError("PersonagemNome","Personagem não localizado, favor informar um nome de personagem valido");
+                }
+               
             var item = _bdoContext.Itens.ToList().Where(x => x.SpotId == id);
             decimal valor = 0;
             int quantidade = 0;
@@ -82,19 +107,19 @@ namespace projetoBDO.Controllers.grindController
 
             }
 
-
             if(ModelState.IsValid)
             {
-                g.User = user;
-                g.Personagem = personagem.First();
-                g.Spot = mapa; 
-                g.DateTime = grind.DateTime;
                 for (int i = 0; i < grind.Itens.Count(); i++)
                 {   
                     
                     valor += grind.Itens[i].Quantidade * grind.Itens[i].Preco;
                     quantidade += grind.Itens[i].Quantidade;
-                }                                                                                                                                         
+                }                                   
+                g.User = user;
+                g.Personagem = personagem;
+                g.Spot = mapa; 
+                g.DateTime = grind.DateTime;
+                g.PersonagemNome = grind.PersonagemNome;                                                                                                      
                 g.ValorTotal = Math.Round(valor,2);
                 g.Quantidade = quantidade;
                  _bdoContext.Grinds.Add(g);

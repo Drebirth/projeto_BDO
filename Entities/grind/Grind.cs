@@ -18,16 +18,22 @@ namespace projetoBDO.Entities.grind
         public DateTime DateTime { get; set; }
 
         public Local? Spot { get; set; }
+
+        public List<Local>? Spots { get; set; }
         
         [Required]
         public List<Item>? Itens { get; set; } = new List<Item>();
-        
-        [Required(ErrorMessage = "Personagem é requirido")]
-        public Personagem? Personagem { get; set; }
 
+        [Required]
+        public string PersonagemNome {get;set;}
+        
+        
+        //[Required(ErrorMessage = "Personagem é requirido")]
+        public Personagem? Personagem { get; set; }
+        /*
         [Required(ErrorMessage = "Personagem é requirido")]
         public List<Personagem>? Personagens { get; set; }
-        
+        */
         [Required]
         public string? User { get; set; }
         public int? Quantidade { get; set; }

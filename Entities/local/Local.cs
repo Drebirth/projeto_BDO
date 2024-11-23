@@ -18,6 +18,8 @@ namespace projetoBDO.Entities.local
 
         public List<Item>? Itens { get; set; }
 
+        
+
       
         
         

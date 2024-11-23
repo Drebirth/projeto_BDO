@@ -31,7 +31,7 @@
                 <td>
                     <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@personagem.Id">Deletar</a>
                     <a asp-action="Edit" class="btn btn-outline-warning" asp-route-id="@personagem.Id">Editar Personagem</a>
-                    
+                    <a asp-controller="Grind" asp-action="Create2" class="btn btn-primary" asp-route-id="@personagem.Id">Adicionar grind</a>
                 </td>
             </tr>
         }
