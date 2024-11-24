@@ -4,7 +4,7 @@
     ViewData["Title"]="Diário de grind";
 }
 
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(x =>x.Spot)</th>
@@ -17,12 +17,12 @@
     <tbody>
         @foreach(var grind in Model){
             <tr>
-            
                 <td>@Html.DisplayFor(model => grind.Spot.Nome)</td>
                 <td>@Html.DisplayFor(model => grind.Personagem.Nome)</td>
                 <td>$ @Html.DisplayFor(model => grind.ValorTotal)</td> 
                 <td>@Html.DisplayFor(model => grind.DateTime)</td> 
                 <th>@Html.DisplayFor(model => grind.Quantidade)</th>
+                <th><a asp-action="DeleteGrind" class="btn btn-danger" asp-route-id="@grind.Id">Deletar</a></th>
             </tr>
         }
     </tbody>

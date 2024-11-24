@@ -7,22 +7,22 @@
 <h1>Seus personagens</h1>
 
 <a asp-action="Create" class="btn btn-primary">Criar novo personagem</a>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(x => x.Id)</th>
-            <th>@Html.DisplayNameFor(x => x.Nome)</th>
-            <th>@Html.DisplayNameFor(x => x.Classe)</th>
-            <th>@Html.DisplayNameFor(x => x.PA)</th>
-            <th>@Html.DisplayNameFor(x => x.DP)</th>
-            <th>@Html.DisplayNameFor(x => x.Level)</th>
+            
+            <th scope="row">@Html.DisplayNameFor(x => x.Nome)</th>
+            <th scope="row">@Html.DisplayNameFor(x => x.Classe)</th>
+            <th scope="row">@Html.DisplayNameFor(x => x.PA)</th>
+            <th scope="row">@Html.DisplayNameFor(x => x.DP)</th>
+            <th scope="row">@Html.DisplayNameFor(x => x.Level)</th>
         </tr>
     </thead>
     <tbody>
         @foreach(var personagem in Model)
         {
             <tr>
-                <td>@Html.DisplayFor(model => personagem.Id)</td>
+            
                 <td>@Html.DisplayFor(model => personagem.Nome)</td>
                 <td>@Html.DisplayFor(model => personagem.Classe)</td>
                 <td>@Html.DisplayFor(model => personagem.PA)</td>
@@ -31,7 +31,6 @@
                 <td>
                     <a asp-action="Delete" class="btn btn-outline-danger" asp-route-id="@personagem.Id">Deletar</a>
                     <a asp-action="Edit" class="btn btn-outline-warning" asp-route-id="@personagem.Id">Editar Personagem</a>
-                    <a asp-controller="Grind" asp-action="Create2" class="btn btn-primary" asp-route-id="@personagem.Id">Adicionar grind</a>
                 </td>
             </tr>
         }

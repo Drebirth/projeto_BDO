@@ -1,0 +1,24 @@
+@model projetoBDO.Entities.grind.Grind;
+
+@{
+    ViewData["Title"] = "Deletar grind";
+}
+
+<h1>Deletar o registro abaixo ?</h1>
+
+<form asp-action="DeleteGrind" method="post">
+    <div>
+        <label for=""></label>
+        <input type="text" asp-for='PersonagemNome' readonly/>
+    </div>
+    <div>
+        <label for=""></label>
+        <input type="text" asp-for="Quantidade" readonly/>
+    </div>
+    <div>
+        <label for=""></label>
+        <input type="text" asp-for="ValorTotal" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-danger">Deletar</button>
+</form>

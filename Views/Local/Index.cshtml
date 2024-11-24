@@ -8,13 +8,9 @@
     <h1>Locais de grind</h1>
     <a asp-action="Create" class="btn btn-primary">Adicionar Spot</a>
 </div>
-
-
-
 <table class="table">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Id)</th>
             <th>@Html.DisplayNameFor(model => model.Nome)</th>
         </tr>
     </thead>
@@ -22,7 +18,6 @@
         @foreach(var spot in Model )
         {
         <tr>
-            <td>@Html.DisplayFor(model => spot.Id)</td>
             <td>@Html.DisplayFor(model => spot.Nome)</td>
             <td>
                 <a asp-controller="Item" asp-action="Create" class="btn btn-outline-primary" asp-route-id='@spot.Id'> Adicionar Itens</a>

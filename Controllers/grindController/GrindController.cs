@@ -42,20 +42,6 @@ namespace projetoBDO.Controllers.grindController
             return View(grind);
         }
 
-/*
-        public IActionResult Create2(long id)
-        {
-            string logado = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
-            var personagem = _bdoContext.Personagens.Find(id);
-            var spots = _bdoContext.Spots.ToList();
-            Grind grind = new Grind();
-            grind.Personagem = personagem;
-            grind.Spots = spots;
-            
-            return View(grind);
-        }
-        */
-        
         public IActionResult Create(long id)
         {        
             string logado = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
@@ -122,7 +108,7 @@ namespace projetoBDO.Controllers.grindController
                 g.PersonagemNome = grind.PersonagemNome;                                                                                                      
                 g.ValorTotal = Math.Round(valor,2);
                 g.Quantidade = quantidade;
-                 _bdoContext.Grinds.Add(g);
+                _bdoContext.Grinds.Add(g);
                 _bdoContext.SaveChanges();
                 return RedirectToAction("index"); 
             }
@@ -130,7 +116,28 @@ namespace projetoBDO.Controllers.grindController
             return View(grind);
         }
         
-       /* [HttpPost]
+        public ActionResult DeleteGrind(long id)
+        {
+            var grind = _bdoContext.Grinds.Find(id);
+            if(grind is null)
+            {
+                return NotFound();
+            }
+            return View(grind);   
+        }
+
+        [HttpPost]
+        public ActionResult DeleteGrind(Grind grind)
+        {
+            var grindParaDeletar = _bdoContext.Grinds.Find(grind.Id);
+            _bdoContext.Grinds.Remove(grindParaDeletar);
+            _bdoContext.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+       /* 
+       [HttpPost]
         public IActionResult Create(Grind grind, long id)
         {
             var user = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
