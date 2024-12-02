@@ -105,8 +105,9 @@ namespace projetoBDO.Controllers.grindController
                 g.Personagem = personagem;
                 g.Spot = mapa; 
                 g.DateTime = grind.DateTime;
-                g.PersonagemNome = grind.PersonagemNome;                                                                                                      
-                g.ValorTotal = Math.Round(valor,2);
+                g.PersonagemNome = grind.PersonagemNome;
+                //g.ValorTotal = valor;                                                                                                      
+                g.ValorTotal = Math.Round(valor,10);
                 g.Quantidade = quantidade;
                 _bdoContext.Grinds.Add(g);
                 _bdoContext.SaveChanges();
@@ -136,45 +137,7 @@ namespace projetoBDO.Controllers.grindController
         }
 
 
-       /* 
-       [HttpPost]
-        public IActionResult Create(Grind grind, long id)
-        {
-            var user = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
-            var mapa = _bdoContext.Spots.Find(id);
-            var personagem = _bdoContext.Personagens.ToList().Where(x => x.Nome == grind.Personagem.Nome);
-            var item = _bdoContext.Itens.ToList().Where(x => x.SpotId == id);
-            double valor = 0;
-            
-            if(grind.Personagens.Count() == null || grind.Personagens.Count() == 0){
-                ModelState.AddModelError("Personagem","Você precisa selecionar um personagem!");
-            }else{
-
-            
-            Grind g = new Grind();
-            g.User = user;
-            g.Personagem = personagem.First();
-            g.Spot = mapa; 
-            g.DateTime = grind.DateTime;
-            
-            
-            for (int i = 0; i < grind.Itens.Count(); i++)
-            {   
-                valor += grind.Itens[i].Quantidade * grind.Itens[i].Preco;
-                g.Quantidade += grind.Itens[i].Quantidade;
-            }                                                                                                                                         
-            g.ValorTotal = valor;
-            
-
-            
-            _bdoContext.Grinds.Add(g);
-            _bdoContext.SaveChanges();
-            return RedirectToAction("index"); 
-            }
-            
-            return View(grind);
-        }*/
-            
+     
             
             
           

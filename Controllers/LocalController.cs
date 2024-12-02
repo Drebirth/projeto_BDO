@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using projetoBDO.Context;
+using projetoBDO.Entities;
 using projetoBDO.Entities.local;
 
 namespace projetoBDO.Controllers.localController
@@ -21,9 +22,12 @@ namespace projetoBDO.Controllers.localController
             _bdoContext = bdodb;
         }
 
+    
         public IActionResult Index(){
-            var local = _bdoContext.Spots.ToList();
+            //int pageSize = 5;
+            var local = _bdoContext.Spots;
             return View(local);
+            //return View(await Paginacao<Local>.CreateAsync(local, pageNumber ?? 1, pageSize)); 
         }
 
         public IActionResult Create()
@@ -34,6 +38,7 @@ namespace projetoBDO.Controllers.localController
         [HttpPost]
         public IActionResult Create(Local local)
         {
+            
             if(ModelState.IsValid)
             {
                 _bdoContext.Spots.Add(local);

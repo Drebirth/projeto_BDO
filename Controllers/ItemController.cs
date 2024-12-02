@@ -45,7 +45,7 @@ namespace projetoBDO.Controllers.itemController
             if(ModelState.IsValid)
             {
                  i.Nome = item.Nome;
-                 i.Preco = item.Preco;
+                 i.Preco = Math.Round(item.Preco,4);
                  i.Spot = teste;
                 _bdoContext.Itens.Add(i);
                 _bdoContext.SaveChanges();

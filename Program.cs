@@ -23,7 +23,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 {
     options.Cookie.Name = "AspNetCore.Cookies";
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(3);
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
     options.SlidingExpiration = true;
 });
 

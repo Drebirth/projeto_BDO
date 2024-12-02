@@ -27,13 +27,8 @@ namespace projetoBDO.Entities.grind
         [Required]
         public string PersonagemNome {get;set;}
         
-        
-        //[Required(ErrorMessage = "Personagem é requirido")]
         public Personagem? Personagem { get; set; }
-        /*
-        [Required(ErrorMessage = "Personagem é requirido")]
-        public List<Personagem>? Personagens { get; set; }
-        */
+        
         [Required]
         public string? User { get; set; }
         public int? Quantidade { get; set; }
