@@ -21,7 +21,6 @@ namespace projetoBDO.Controllers.itemController
         public ItemController(BdoContext bdoContext){
             _bdoContext = bdoContext;
         }
-
         
         public IActionResult Index(long id){
             var lista = _bdoContext.Itens.ToList().Where(x => x.SpotId == id);
@@ -78,6 +77,20 @@ namespace projetoBDO.Controllers.itemController
                 //return RedirectToAction("Index","LocalController", new { id = item.Id });
             }
             return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(long id)
+        {
+           var ItemDeletado = _bdoContext.Itens.Find(id);
+           if(ItemDeletado is null)
+           {
+                return NotFound();
+           }
+
+           _bdoContext.Remove(ItemDeletado);
+           _bdoContext.SaveChanges();
+          return RedirectToAction("Index","ItemController");
         }
 
         

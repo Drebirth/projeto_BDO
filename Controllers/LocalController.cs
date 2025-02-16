@@ -53,8 +53,7 @@ namespace projetoBDO.Controllers.localController
             var local = _bdoContext.Spots.Include(item => item.Itens)
             .FirstOrDefault(item => item.Id == id);
             return View(local);
-            //var busca = _bdoContext.Spots.Find(id);
-            //return View(busca);
+           
         }
 
         public IActionResult Edit(long id)
