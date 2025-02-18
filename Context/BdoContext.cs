@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using projetoBDO.Entities.grind;
 using projetoBDO.Entities.item;
-using projetoBDO.Entities.local;
+using projetoBDO.Entities.spot;
 using projetoBDO.Entities.personagem;
 
 namespace projetoBDO.Context
@@ -15,7 +15,7 @@ namespace projetoBDO.Context
         public BdoContext(DbContextOptions<BdoContext> options) : base(options){ }
 
 
-        public DbSet<Local> Spots { get; set; }
+        public DbSet<Spot> Spots { get; set; }
 
         public DbSet<Item> Itens { get; set; }
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using projetoBDO.Entities.item;
-using projetoBDO.Entities.local;
+using projetoBDO.Entities.spot;
 using projetoBDO.Entities.personagem;
 
 namespace projetoBDO.Entities.grind
@@ -17,9 +17,9 @@ namespace projetoBDO.Entities.grind
         [DataType(DataType.Date)]
         public DateTime DateTime { get; set; }
 
-        public Local? Spot { get; set; }
+        public Spot? Spot { get; set; }
 
-        public List<Local>? Spots { get; set; }
+        public List<Spot>? Spots { get; set; }
         
         [Required]
         public List<Item>? Itens { get; set; } = new List<Item>();

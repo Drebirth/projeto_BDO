@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using projetoBDO.Entities.item;
 
-namespace projetoBDO.Entities.local
+namespace projetoBDO.Entities.spot
+
 {
-    public class Local
+    public class Spot
     {
 
         public long Id { get; set; }

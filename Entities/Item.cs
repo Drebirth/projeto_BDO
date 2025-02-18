@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using projetoBDO.Entities.local;
+using projetoBDO.Entities.spot;
 
 namespace projetoBDO.Entities.item
 {
@@ -21,7 +21,7 @@ namespace projetoBDO.Entities.item
 
         public long SpotId { get; set; }
     
-        public Local? Spot { get; set; }
+        public Spot? Spot { get; set; }
 
     }
 }

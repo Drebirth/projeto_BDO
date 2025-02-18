@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using projetoBDO.Context;
 using projetoBDO.Entities;
-using projetoBDO.Entities.local;
+using projetoBDO.Entities.spot;
 
 namespace projetoBDO.Controllers.localController
 {
@@ -36,7 +36,7 @@ namespace projetoBDO.Controllers.localController
         }
 
         [HttpPost]
-        public IActionResult Create(Local local)
+        public IActionResult Create(Spot local)
         {
             
             if(ModelState.IsValid)
@@ -67,7 +67,7 @@ namespace projetoBDO.Controllers.localController
         }
 
         [HttpPost]
-        public IActionResult Edit(Local local)
+        public IActionResult Edit(Spot local)
         {
             var localBanco = _bdoContext.Spots.Find(local.Id);
             localBanco.Nome = local.Nome;
@@ -92,7 +92,7 @@ namespace projetoBDO.Controllers.localController
         }
 
         [HttpPost]
-        public IActionResult Delete(Local local)
+        public IActionResult Delete(Spot local)
         {
             var l = _bdoContext.Spots.Find(local.Id);
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using projetoBDO.Entities.item;
-using projetoBDO.Entities.local;
+using projetoBDO.Entities.spot;
 using projetoBDO.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
