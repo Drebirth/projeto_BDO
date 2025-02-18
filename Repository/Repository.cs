@@ -6,6 +6,11 @@ public class Repository<T> : IRepository<T> where T :class
 {
     protected readonly BdoContext _context;
 
+    public Repository(BdoContext context)
+    {
+        _context = context;
+    }
+
     public T Create(T entity)
     {
         _context.Set<T>().Add(entity);

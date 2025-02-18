@@ -65,7 +65,7 @@ namespace projetoBDO.Controllers.accountController
 
             if(result.Succeeded)
             {
-                return RedirectToAction("index","local");
+                return RedirectToAction("index","spot");
             }
                 ModelState.AddModelError(string.Empty,"Login inválido");
             }

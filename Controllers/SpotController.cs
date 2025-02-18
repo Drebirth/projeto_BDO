@@ -8,24 +8,26 @@ using Microsoft.EntityFrameworkCore;
 using projetoBDO.Context;
 using projetoBDO.Entities;
 using projetoBDO.Entities.spot;
+using projetoBDO.Repository;
 
-namespace projetoBDO.Controllers.localController
+namespace projetoBDO.Controllers.spotController
 {
     
     [Authorize]
-    public class LocalController : Controller
+    public class SpotController : Controller
     {
-        private readonly BdoContext _bdoContext;
+        //private readonly BdoContext _bdoContext;
+        private readonly ISpotRepository _repository;
 
-        public LocalController(BdoContext bdodb)
+        public SpotController(ISpotRepository repository)
         {
-            _bdoContext = bdodb;
+            _repository = repository;
         }
 
     
         public IActionResult Index(){
             //int pageSize = 5;
-            var local = _bdoContext.Spots;
+            var local = _repository.GetAll();
             return View(local);
             //return View(await Paginacao<Local>.CreateAsync(local, pageNumber ?? 1, pageSize)); 
         }
@@ -41,8 +43,9 @@ namespace projetoBDO.Controllers.localController
             
             if(ModelState.IsValid)
             {
-                _bdoContext.Spots.Add(local);
-                _bdoContext.SaveChanges();
+                //_bdoContext.Spots.Add(local);
+                _repository.Create(local);
+                //_bdoContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(local);
@@ -50,16 +53,17 @@ namespace projetoBDO.Controllers.localController
 
         public IActionResult Details(long id)
         {
-            var local = _bdoContext.Spots.Include(item => item.Itens)
-            .FirstOrDefault(item => item.Id == id);
+            //var local = _bdoContext.Spots.Include(item => item.Itens).FirstOrDefault(item => item.Id == id);
+            var local = _repository.Get(id);
             return View(local);
            
         }
 
         public IActionResult Edit(long id)
         {
-            var local = _bdoContext.Spots.Find(id);
-            if(local == null)
+            //var local = _bdoContext.Spots.Find(id);
+            var local = _repository.Get(id);
+            if (local == null)
             {
                 return NotFound();
             }
@@ -69,13 +73,15 @@ namespace projetoBDO.Controllers.localController
         [HttpPost]
         public IActionResult Edit(Spot local)
         {
-            var localBanco = _bdoContext.Spots.Find(local.Id);
+            //var localBanco = _bdoContext.Spots.Find(local.Id);
+            var localBanco = _repository.Get(local.Id);
             localBanco.Nome = local.Nome;
             if(ModelState.IsValid)
             {
                 //teste.Nome = local.Nome;
-                _bdoContext.Spots.Update(localBanco);
-                _bdoContext.SaveChanges();
+                //_bdoContext.Spots.Update(localBanco);
+                _repository.Update(localBanco);
+                //_bdoContext.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(local);
@@ -83,8 +89,9 @@ namespace projetoBDO.Controllers.localController
 
         public IActionResult Delete(long id)
         {
-            var local = _bdoContext.Spots.Find(id);
-            if(local == null)
+            //var local = _bdoContext.Spots.Find(id);
+            var local = _repository.Get(id);
+            if (local == null)
             {
                 return NotFound();
             }
@@ -94,10 +101,12 @@ namespace projetoBDO.Controllers.localController
         [HttpPost]
         public IActionResult Delete(Spot local)
         {
-            var l = _bdoContext.Spots.Find(local.Id);
+            //var l = _bdoContext.Spots.Find(local.Id);
+            var localBanco = _repository.Get(local.Id);
 
-            _bdoContext.Spots.Remove(l);
-            _bdoContext.SaveChanges();
+            //_bdoContext.Spots.Remove(l);
+            //_bdoContext.SaveChanges();
+            _repository.Delete(localBanco);
 
             return RedirectToAction("Index");
         }
