@@ -35,10 +35,7 @@ namespace projetoBDO.Controllers.grindController
             var personagens = _bdoContext.Personagens.ToList();
             var grind = _bdoContext.Grinds.ToList().Where(x => x.User == logado);
             var mapas = _bdoContext.Spots.ToList();
-            
-            
         
-
             return View(grind);
         }
 

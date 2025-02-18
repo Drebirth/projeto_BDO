@@ -13,6 +13,7 @@ namespace projetoBDO.Entities.item
         
         [Required(ErrorMessage = "O campo Nome não pode ser vazio!")]
         public string Nome { get; set; }
+        
         [Required(ErrorMessage = "O campo Preco não pode ser vazio!")]
         public decimal Preco { get; set; }
 
