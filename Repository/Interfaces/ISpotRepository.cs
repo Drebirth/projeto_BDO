@@ -1,8 +1,9 @@
 ﻿using projetoBDO.Entities.spot;
 
-namespace projetoBDO.Repository
+namespace projetoBDO.Repository.Interfaces
 {
     public interface ISpotRepository : IRepository<Spot>
     {
+        
     }
 }

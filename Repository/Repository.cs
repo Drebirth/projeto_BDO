@@ -1,4 +1,5 @@
 using projetoBDO.Context;
+using projetoBDO.Repository.Interfaces;
 
 namespace projetoBDO.Repository;
 

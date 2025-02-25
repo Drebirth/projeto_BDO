@@ -7,8 +7,8 @@
 <h1>Deseja excluir o spot abaixo?</h1>
 <form asp-action="Delete">
 <div class="row mb-3">
-    <label class="form-label">@Html.DisplayNameFor(x => x.Nome)</label>
-     <input type="text" class="form-control" value=@Html.DisplayFor(x => x.Nome) readonly/>
+        <label  class="form-label">@Html.DisplayNameFor(x => x.Nome)</label>
+        <input  type="text" class="form-control" value=@Html.DisplayFor(x => x.Nome) readonly />
 </div>
 <div class="botao">
     <button type="submit" class="btn btn-danger" style="width: 60%;">Deletar</button>

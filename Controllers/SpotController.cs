@@ -8,15 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using projetoBDO.Context;
 using projetoBDO.Entities;
 using projetoBDO.Entities.spot;
-using projetoBDO.Repository;
+using projetoBDO.Repository.Interfaces;
 
 namespace projetoBDO.Controllers.spotController
 {
-    
+
     [Authorize]
     public class SpotController : Controller
     {
-        //private readonly BdoContext _bdoContext;
         private readonly ISpotRepository _repository;
 
         public SpotController(ISpotRepository repository)
@@ -26,10 +25,10 @@ namespace projetoBDO.Controllers.spotController
 
     
         public IActionResult Index(){
-            //int pageSize = 5;
+     
             var local = _repository.GetAll();
             return View(local);
-            //return View(await Paginacao<Local>.CreateAsync(local, pageNumber ?? 1, pageSize)); 
+     
         }
 
         public IActionResult Create()
@@ -43,9 +42,8 @@ namespace projetoBDO.Controllers.spotController
             
             if(ModelState.IsValid)
             {
-                //_bdoContext.Spots.Add(local);
                 _repository.Create(local);
-                //_bdoContext.SaveChanges();
+     
                 return RedirectToAction("Index");
             }
             return View(local);
@@ -53,7 +51,7 @@ namespace projetoBDO.Controllers.spotController
 
         public IActionResult Details(long id)
         {
-            //var local = _bdoContext.Spots.Include(item => item.Itens).FirstOrDefault(item => item.Id == id);
+            
             var local = _repository.Get(id);
             return View(local);
            
@@ -61,7 +59,7 @@ namespace projetoBDO.Controllers.spotController
 
         public IActionResult Edit(long id)
         {
-            //var local = _bdoContext.Spots.Find(id);
+            
             var local = _repository.Get(id);
             if (local == null)
             {
@@ -73,15 +71,14 @@ namespace projetoBDO.Controllers.spotController
         [HttpPost]
         public IActionResult Edit(Spot local)
         {
-            //var localBanco = _bdoContext.Spots.Find(local.Id);
+            
             var localBanco = _repository.Get(local.Id);
             localBanco.Nome = local.Nome;
+            
             if(ModelState.IsValid)
             {
-                //teste.Nome = local.Nome;
-                //_bdoContext.Spots.Update(localBanco);
                 _repository.Update(localBanco);
-                //_bdoContext.SaveChanges();
+              
                 return RedirectToAction("Index");
             }
             return View(local);
@@ -89,7 +86,7 @@ namespace projetoBDO.Controllers.spotController
 
         public IActionResult Delete(long id)
         {
-            //var local = _bdoContext.Spots.Find(id);
+            
             var local = _repository.Get(id);
             if (local == null)
             {
@@ -101,11 +98,8 @@ namespace projetoBDO.Controllers.spotController
         [HttpPost]
         public IActionResult Delete(Spot local)
         {
-            //var l = _bdoContext.Spots.Find(local.Id);
+            
             var localBanco = _repository.Get(local.Id);
-
-            //_bdoContext.Spots.Remove(l);
-            //_bdoContext.SaveChanges();
             _repository.Delete(localBanco);
 
             return RedirectToAction("Index");

@@ -1,4 +1,4 @@
-﻿namespace projetoBDO.Repository
+﻿namespace projetoBDO.Repository.Interfaces
 {
     public interface IRepository<T>
     {

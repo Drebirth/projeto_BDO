@@ -20,7 +20,6 @@
         <tr>
             <td>@Html.DisplayFor(model => spot.Nome)</td>
             <td>
-                <a asp-controller="Item" asp-action="Create" class="btn btn-outline-primary" asp-route-id='@spot.Id'> Adicionar Itens</a>
                 <a asp-controller="Item" asp-action="Index" class="btn btn-outline-secondary" asp-route-id='@spot.Id'>Lista de itens</a>
                 <a asp-controller="Spot" asp-action="Details" class="btn btn-outline-info" asp-route-id='@spot.Id'>Detalhes do Spot</a>
                 <a asp-controller="Spot" asp-action="Edit" class="btn btn-outline-warning" asp-route-id='@spot.Id'>Editar Spot</a>
