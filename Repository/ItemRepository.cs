@@ -1,5 +1,5 @@
 ﻿using projetoBDO.Context;
-using projetoBDO.Entities.item;
+using projetoBDO.Entities;
 using projetoBDO.Repository.Interfaces;
 
 namespace projetoBDO.Repository

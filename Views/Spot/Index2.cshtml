@@ -1,0 +1,29 @@
+﻿@using projetoBDO.Paginacao;
+@model  PaginatedList<projetoBDO.Entities.Spot>
+
+
+    <h2>Lista de Spots</h2>
+
+
+<table class="table table-striped">
+    @foreach (var item in Model)
+    {
+        <tr scope="row">
+            <td>@item.Nome</td>
+        </tr>
+    }
+</table>
+
+<div>
+        Pagína @(Model.PaginaAtual) de @(Model.TotalPages)
+</div>
+
+@if (Model.HasPreviousPage)
+{   
+        <a asp-action="Index2" asp-route-pageNumber="@(Model.PaginaAtual - 1)">Antes</a>
+}
+
+@if (Model.HasNextPage)
+{
+        <a asp-action="Index2" asp-route-pageNumber="@(Model.PaginaAtual + 1)">Depois</a>
+}

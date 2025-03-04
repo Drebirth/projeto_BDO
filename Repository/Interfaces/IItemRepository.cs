@@ -1,4 +1,4 @@
-﻿using projetoBDO.Entities.item;
+﻿using projetoBDO.Entities;
 
 namespace projetoBDO.Repository.Interfaces
 {

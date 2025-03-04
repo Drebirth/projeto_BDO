@@ -1,5 +1,4 @@
-﻿using projetoBDO.Entities.item;
-using projetoBDO.Entities.spot;
+﻿using projetoBDO.Entities;
 
 namespace projetoBDO.Models
 {

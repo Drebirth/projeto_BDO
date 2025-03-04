@@ -10,8 +10,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using projetoBDO.Context;
-using projetoBDO.Entities.grind;
-using projetoBDO.Entities.personagem;
+using projetoBDO.Entities;
 using projetoBDO.Models;
 
 namespace projetoBDO.Controllers.grindController

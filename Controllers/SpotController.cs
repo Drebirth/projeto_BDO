@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using projetoBDO.Context;
 using projetoBDO.Entities;
-using projetoBDO.Entities.spot;
+using projetoBDO.Paginacao;
 using projetoBDO.Repository.Interfaces;
 
 namespace projetoBDO.Controllers.spotController
@@ -23,13 +23,17 @@ namespace projetoBDO.Controllers.spotController
             _repository = repository;
         }
 
-    
-        public IActionResult Index(){
-     
-            var local = _repository.GetAll();
-            return View(local);
-     
+        public  IActionResult Index2(int? pageNumber)
+        {
+            int pageSize = 15;
+            var spots = _repository.GetAll();
+            //return View(await PaginatedList<Spot>.CreateAsync((IQueryable<Spot>)spots.AsQueryable(), pageNumber ?? 1, pageSize));
+            var paginatedList =  PaginatedList<Spot>.Create((IQueryable<Spot>)spots.AsQueryable(), pageNumber ?? 1, pageSize);
+            return View(paginatedList);
+            //var items = await PaginatedList<projetoBDO.Entities.Spot>.CreateAsync(spots.AsQueryable(), pageIndex, pageSize);
+
         }
+
 
         public IActionResult Create()
         {

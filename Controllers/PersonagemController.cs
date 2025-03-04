@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using projetoBDO.Context;
-using projetoBDO.Entities.personagem;
+using projetoBDO.Entities;
 
 namespace projetoBDO.Controllers.personagemController
 {

@@ -1,5 +1,6 @@
 ﻿using projetoBDO.Context;
-using projetoBDO.Entities.spot;
+using projetoBDO.Entities;
+using projetoBDO.Paginacao;
 using projetoBDO.Repository.Interfaces;
 
 namespace projetoBDO.Repository
@@ -12,6 +13,11 @@ namespace projetoBDO.Repository
             
         }
 
-       
+        //public Paginacao<Spot> GetSpots(Paginacao paginacao)
+        //{
+        //    var spots = GetAll().OrderBy(x => x.Id).AsQueryable();
+        //    var spotsOrdenados = Paginacao<Spot>
+
+        //}
     }
 }

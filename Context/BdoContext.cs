@@ -3,11 +3,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using projetoBDO.Entities.grind;
-using projetoBDO.Entities.item;
-using projetoBDO.Entities.spot;
-using projetoBDO.Entities.personagem;
-
+using projetoBDO.Entities;
 namespace projetoBDO.Context
 {
     public class BdoContext : IdentityDbContext
