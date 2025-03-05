@@ -27,8 +27,8 @@
             <td>@Html.DisplayFor(model => item.Spot.Nome)</td>
             <td>
             <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning">Editar Item</a>
-            <form asp-action="Delete">
-                <input type="tex" asp-for="@item.Id" hidden/>
+            <form method="post" asp-action="Delete">
+                <input type="text" asp-for="@item.Id" hidden/>
                     <button type="submit" class="btn btn-danger" style="width: 60%;">Deletar</button>
                     </form>
             </td/>
@@ -38,4 +38,4 @@
         
     </tbody>
 </table>
-<a asp-controller="Spot" asp-action="Index" class="btn btn-secondary">Voltar</a>
+<a asp-controller="Spot" asp-action="Index2" class="btn btn-secondary">Voltar</a>

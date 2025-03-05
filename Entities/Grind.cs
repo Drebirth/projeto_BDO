@@ -26,7 +26,9 @@ public class Grind
     public string PersonagemNome {get;set;}
     
     public Personagem? Personagem { get; set; }
-    
+
+    public List<Personagem>? Personagens { get; set; }
+
     [Required]
     public string? User { get; set; }
     public int? Quantidade { get; set; }

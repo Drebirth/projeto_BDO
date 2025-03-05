@@ -10,9 +10,9 @@
 
 
 <form asp-action="Teste" method="post">
-	<div>
-		<label>Spot Nome</label>	
-		<select asp-for="SpotId" >
+	<div class="row mb-3">
+		<label class="form-label">Spot Nome</label>	
+		<select asp-for="SpotId" class="form-select" >
 			<option value="">Selecione um Spot</option>
 			@foreach (var spot in Model.spots)
 			{
@@ -20,7 +20,7 @@
 			}
 		</select>
 	</div>
-
+	
 	<div class="row mb-3">
 		<label class="form-label">Nome Item</label>
 		<input type="text" asp-for="item.Nome" class="form-control" />

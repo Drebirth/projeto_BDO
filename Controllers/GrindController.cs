@@ -54,7 +54,7 @@ namespace projetoBDO.Controllers.grindController
            else{
             Grind grind = new Grind();
             grind.Spot =  mapa;
-           // grind.Personagens = personagens.ToList();
+            grind.Personagens = personagens.ToList();
             grind.Itens = itens.ToList();
             grind.DateTime = DateTime.Now;
             return View(grind);

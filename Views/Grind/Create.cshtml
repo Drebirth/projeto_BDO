@@ -6,12 +6,26 @@
 
 <h1>Jornada</h1>
 <form asp-action="Create" method="post">
-        <div class="form-group">
-            <input asp-for="User" value="@User" hidden/>
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <label class="form-label">Personagem</label>
+    <div class="form-group">
+        <input asp-for="User" value="@User" hidden/>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <label class="form-label">Personagem</label>
+        <select asp-for="PersonagemNome" class="form-select">
+            <option value="Seleciona o personagem">
+                @foreach (var personagem in Model.Personagens)
+                {
+                <option value="@personagem.Nome">@personagem.Nome</option>
+          
+                }
+                </option>
+            </select>
+
+
+            <!--
             <input class="form-control" asp-for="PersonagemNome" />
-          <!--  <input asp-for="Personagem.Nome" type="text"  class="form-control" list="personagens"  placeholder="Qual personagem"> 
+            -->
+
+          <!-- <input asp-for="Personagem.Nome" type="text"  class="form-control" list="personagens"  placeholder="Qual personagem"> 
             <input asp-for="Personagens" hidden/>
             <span asp-validation-for="Personagem" class="text-danger"></span>
              <datalist  id="personagens">
@@ -49,6 +63,6 @@
             <button type="submit" style="width: 60%;" class="btn btn-primary">Salvar</button>   
         </div>
 </form>
-<a asp-controller="Local" asp-action="Index" class="btn btn-secondary">Voltar</a>
+<a asp-controller="Spot" asp-action="Index2" class="btn btn-secondary">Voltar</a>
 
 
