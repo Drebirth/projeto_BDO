@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,13 @@ namespace projetoBDO.Controllers.accountController
     {
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
         }   
 
          public IActionResult Register()
@@ -30,6 +33,15 @@ namespace projetoBDO.Controllers.accountController
         {
             if(ModelState.IsValid)
             {
+                if (!await roleManager.RoleExistsAsync("ADMIN"))
+                {
+                    await roleManager.CreateAsync(new IdentityRole("ADMIN"));
+                }
+                if (!await roleManager.RoleExistsAsync("USER"))
+                {
+                    await roleManager.CreateAsync(new IdentityRole("USER"));
+                }
+
                 var user = new IdentityUser{
                     UserName = model.Usuario
                 };
@@ -39,7 +51,9 @@ namespace projetoBDO.Controllers.accountController
                  if (result.Succeeded)
                  {
                      await signInManager.SignInAsync(user, isPersistent: false);
-                     return RedirectToAction("login", "account");
+                    //await userManager.AddClaimAsync(user, new Claim("PERMISSAO","ADMIN"));
+                    await userManager.AddToRoleAsync(user, "USER");
+                    return RedirectToAction("login", "account");
                  }
 
                 foreach(var error in result.Errors)

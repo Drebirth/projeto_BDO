@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\Danie\Estudos\.Net\Meus_Projetos\Producao\BDO</_PublishTargetUrl>
+    <History>False|2025-03-13T01:49:54.9187500Z||;True|2025-03-12T22:23:46.3993339-03:00||;True|2025-03-12T22:21:50.0003774-03:00||;False|2025-03-12T22:21:00.8959911-03:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="SQLiteConnection">
+      <Value>Data Source=Bdo.db</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

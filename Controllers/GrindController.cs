@@ -130,6 +130,7 @@ namespace projetoBDO.Controllers.grindController
             _bdoContext.Grinds.Remove(grindParaDeletar);
             _bdoContext.SaveChanges();
             return RedirectToAction(nameof(Index));
+
         }
 
 

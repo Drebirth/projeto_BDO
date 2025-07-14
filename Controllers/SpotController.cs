@@ -13,7 +13,7 @@ using projetoBDO.Repository.Interfaces;
 namespace projetoBDO.Controllers.spotController
 {
 
-    [Authorize]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class SpotController : Controller
     {
         private readonly ISpotRepository _repository;
