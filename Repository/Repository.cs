@@ -1,9 +1,9 @@
+using Microsoft.EntityFrameworkCore;
 using projetoBDO.Context;
-using projetoBDO.Repository.Interfaces;
 
 namespace projetoBDO.Repository;
 
-public class Repository<T> : IRepository<T> where T :class
+public class Repository<T> : IRepository<T> where T : class
 {
     protected readonly BdoContext _context;
 
@@ -12,34 +12,31 @@ public class Repository<T> : IRepository<T> where T :class
         _context = context;
     }
 
-    public T Create(T entity)
+    public async Task CreateAsync(T entity)
     {
-        _context.Set<T>().Add(entity);
-        _context.SaveChanges();
-        return entity;
+        await _context.Set<T>().AddAsync(entity);
+        await _context.SaveChangesAsync();
     }
 
-    public T Delete(T entity)
+    public async Task DeleteAsync(T entity)
     {
-       _context.Set<T>().Remove(entity);
-        _context.SaveChanges();
-        return entity;
+        _context.Set<T>().Remove(entity);
+        await _context.SaveChangesAsync();
     }
 
-    public T? Get(long id)
-    {
-        return _context.Set<T>().Find(id);
+    public async Task<IEnumerable<T>> GetAllAsync()
+    {       
+        return await _context.Set<T>().ToListAsync();
     }
 
-    public IEnumerable<T> GetAll()
-    {
-        return _context.Set<T>().ToList();
+    public async Task<T?> GetAsync(int id)
+    {        
+        return await _context.Set<T>().FindAsync(id);
     }
 
-    public T Update(T entity)
+    public async Task UpdateAsync(T entity)
     {
         _context.Set<T>().Update(entity);
-        _context.SaveChanges();
-        return entity;
+        await _context.SaveChangesAsync();
     }
 }

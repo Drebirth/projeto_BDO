@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Spot>
+
+<h2>Lista de Mapa</h2>
+
+@{
+	ViewData["Title"] = "Lista de Mapas";
+}
+
+<a asp-action="Create" class="btn btn-primary" >Adicionar Mapa</a>
+<br />
+<table class="">
+	<thead>
+		<tr>
+			<th>Nome</th>
+			<th>Nível Recomendado</th>
+			<th>Ataque Recomendado</th>
+			<th>Defesa recomendada</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach(var mapas in Model)
+		{			
+		<tr>
+			<td>@mapas.Nome</td>
+			<td>@mapas.NivelRecomendado</td>
+			<td>@mapas.AtaqueRecomendado</td>
+			<td>@mapas.DefesaRecomendada</td>			
+				<td><a asp-action="Details" asp-route-id="@mapas.Id" class="btn btn-primary">Detalhes</a></td>
+				<td><a asp-action="Edit" asp-route-id="@mapas.Id" class="btn btn-primary">Editar</a></td>
+				<td><a asp-action="Delete" asp-route-id="@mapas.Id" class="btn btn-primary">Excluir</a></td>
+		</tr>
+		}
+	</tbody>
+</table>
+

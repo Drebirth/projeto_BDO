@@ -11,11 +11,19 @@ namespace projetoBDO.Entities;
 public class Spot
 {
 
-    public long Id { get; set; }
+    public int Id { get; set; }
 
     [Required(ErrorMessage = "O campo Nome não pode ser vazio!")]
     public string Nome { get; set; }
 
+    public int? NivelRecomendado { get; set; }
+
+    public int? AtaqueRecomendado { get; set; }
+
+    public int? DefesaRecomendada { get; set; }
+
+    public string? ImagemUrl { get; set; }
+    
     public List<Item>? Itens { get; set; }
 
     

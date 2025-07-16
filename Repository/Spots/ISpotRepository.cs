@@ -1,9 +1,8 @@
 ﻿using projetoBDO.Entities;
 
-namespace projetoBDO.Repository.Interfaces
+namespace projetoBDO.Repository.Spots
 {
     public interface ISpotRepository : IRepository<Spot>
     {
-        //IEnumerable<Spot> GetSpots(Paginacao paginacao);
     }
 }

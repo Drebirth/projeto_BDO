@@ -53,7 +53,7 @@ namespace projetoBDO.Controllers.accountController
                      await signInManager.SignInAsync(user, isPersistent: false);
                     //await userManager.AddClaimAsync(user, new Claim("PERMISSAO","ADMIN"));
                     await userManager.AddToRoleAsync(user, "USER");
-                    return RedirectToAction("login", "account");
+                    return RedirectToAction("Index", "Personagem");
                  }
 
                 foreach(var error in result.Errors)
@@ -79,7 +79,7 @@ namespace projetoBDO.Controllers.accountController
 
             if(result.Succeeded)
             {
-                return RedirectToAction("index2","spot");
+                return RedirectToAction("index","spot");
             }
                 ModelState.AddModelError(string.Empty,"Login inválido");
             }

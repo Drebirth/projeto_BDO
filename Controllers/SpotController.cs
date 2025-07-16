@@ -1,39 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using projetoBDO.Context;
+﻿using Microsoft.AspNetCore.Mvc;
 using projetoBDO.Entities;
-using projetoBDO.Paginacao;
-using projetoBDO.Repository.Interfaces;
+using projetoBDO.Services;
+using System.Threading.Tasks;
 
-namespace projetoBDO.Controllers.spotController
+namespace projetoBDO.Controllers
 {
-
-    [Authorize(Policy = "RequireAdministratorRole")]
     public class SpotController : Controller
     {
-        private readonly ISpotRepository _repository;
+        private readonly SpotService _service;
 
-        public SpotController(ISpotRepository repository)
+        public SpotController(SpotService service)
         {
-            _repository = repository;
+            _service = service;
         }
 
-        public  IActionResult Index2(int? pageNumber)
+
+        public async Task<IActionResult> Index()
         {
-            int pageSize = 10;
-            var spots = _repository.GetAll();
-            //return View(await PaginatedList<Spot>.CreateAsync((IQueryable<Spot>)spots.AsQueryable(), pageNumber ?? 1, pageSize));
-            //var items = await PaginatedList<projetoBDO.Entities.Spot>.CreateAsync(spots.AsQueryable(), pageIndex, pageSize);
-            var paginatedList =  PaginatedList<Spot>.Create((IQueryable<Spot>)spots.AsQueryable(), pageNumber ?? 1, pageSize);
-            return View(paginatedList);
-
+            var spots = await _service.GetAllSpotsAsync();
+            return View(spots);
         }
-
 
         public IActionResult Create()
         {
@@ -41,74 +27,69 @@ namespace projetoBDO.Controllers.spotController
         }
 
         [HttpPost]
-        public IActionResult Create(Spot local)
+        public async Task<IActionResult> Create(Spot spot)
         {
-            
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                _repository.Create(local);
-     
+                await _service.CreateSpotAsync(spot);
                 return RedirectToAction("Index");
             }
-            return View(local);
+            return View(spot);
         }
 
-        public IActionResult Details(long id)
+        public async Task<IActionResult> Details(int id)
         {
-            
-            var local = _repository.Get(id);
-            return View(local);
-           
-        }
-
-        public IActionResult Edit(long id)
-        {
-            
-            var local = _repository.Get(id);
-            if (local == null)
+            var spot = await _service.GetSpotPorId(id);
+            if (spot == null)
             {
                 return NotFound();
             }
-            return View(local);
+            return View(spot);
         }
 
-        [HttpPost]
-        public IActionResult Edit(Spot local)
+        public async Task<IActionResult> Edit(int id)
         {
-            
-            var localBanco = _repository.Get(local.Id);
-            localBanco.Nome = local.Nome;
-            
-            if(ModelState.IsValid)
-            {
-                _repository.Update(localBanco);
-              
-                return RedirectToAction("Index");
-            }
-            return View(local);
-        }
-
-        public IActionResult Delete(long id)
-        {
-            
-            var local = _repository.Get(id);
-            if (local == null)
+            var spot = await _service.GetSpotPorId(id);
+            if (spot == null)
             {
                 return NotFound();
             }
-            return View(local);
+            return View(spot);
         }
 
         [HttpPost]
-        public IActionResult Delete(Spot local)
+        public async Task<IActionResult> Edit(Spot spot)
         {
-            
-            var localBanco = _repository.Get(local.Id);
-            _repository.Delete(localBanco);
-
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                await _service.UpdateSpotAsync(spot);
+                return RedirectToAction("Index");
+            }
+            return View(spot);
         }
 
+        public async Task<IActionResult> Delete(int id)
+        {
+            var spot = await _service.GetSpotPorId(id);
+            if (spot == null)
+            {
+                return NotFound();
+            }
+            return View(spot);
+        }
 
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            try
+            {
+                await _service.DeleteSpotAsync(id);
+                return RedirectToAction("Index");
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+        }
     }
 }

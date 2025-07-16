@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using projetoBDO.Context;
 using projetoBDO.Repository;
 using projetoBDO.Repository.Interfaces;
+using projetoBDO.Repository.Spots;
+using projetoBDO.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,7 @@ builder.Services.AddDbContext<BdoContext>(options =>
 //    options.AddPolicy("RequireAdmin", policy =>
 //    policy.RequireClaim("PERMISSAO", "ADMIN"));
 //});
+
 // roles
 builder.Services.AddAuthorization(options =>
 {
@@ -34,28 +37,30 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
         .AddEntityFrameworkStores<BdoContext>();
 builder.Services.AddScoped<ISpotRepository, SpotRepository>();
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
+builder.Services.AddScoped<SpotService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 {
+    options.Cookie.HttpOnly = true; // HttpOnly evita que o cookie seja acessado via JavaScript
     options.Cookie.Name = "AspNetCore.Cookies";
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(3);
     options.SlidingExpiration = true;
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-// if (!app.Environment.IsDevelopment())
-// {
-//     app.UseExceptionHandler("/Home/Error");
-//     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-//     app.UseHsts();
-// }
-if (app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-    app.UseHsts();
-}
+ //Configure the HTTP request pipeline.
+ if (!app.Environment.IsDevelopment())
+ {
+     app.UseExceptionHandler("/Home/Error");
+     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+     app.UseHsts();
+ }
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseExceptionHandler("/Home/Error");
+//    app.UseHsts();
+//}
 
 
 // App j� est� pronto para ser executado
