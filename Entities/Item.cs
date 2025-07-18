@@ -9,18 +9,21 @@ namespace projetoBDO.Entities;
 
 public class Item
 {
-    public long Id { get; set; }
+    [Key]
+    public int IdItem { get; set; }
     
     [Required(ErrorMessage = "O campo Nome não pode ser vazio!")]
     public string Nome { get; set; }
     
     [Required(ErrorMessage = "O campo Preco não pode ser vazio!")]
     public decimal Preco { get; set; }
+    
+    public int? SpotId { get; set; }
+    
+    public ICollection<Spot>? Spots { get; set; }
 
-    public int Quantidade { get; set; }
+    public string? ImagemUrl { get; set; }
 
-    public long SpotId { get; set; }
 
-    public Spot? Spot { get; set; }
 
 }

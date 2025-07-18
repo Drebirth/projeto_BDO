@@ -8,10 +8,12 @@ namespace projetoBDO.Controllers
     public class SpotController : Controller
     {
         private readonly SpotService _service;
+        private readonly ItemService _itemService;
 
-        public SpotController(SpotService service)
+        public SpotController(SpotService service, ItemService itemService)
         {
             _service = service;
+            _itemService = itemService;
         }
 
 
@@ -23,7 +25,11 @@ namespace projetoBDO.Controllers
 
         public IActionResult Create()
         {
-            return View();
+           var spot = new Spot
+            {
+                Itens = (ICollection<Item>)_itemService.GetAllItemsAsync().Result // This is a blocking call, consider using async/await in production code
+           };
+            return View(spot);
         }
 
         [HttpPost]

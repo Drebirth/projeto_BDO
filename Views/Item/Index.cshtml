@@ -1,41 +1,29 @@
-@model IEnumerable<projetoBDO.Entities.Item>
+﻿@model IEnumerable<projetoBDO.Entities.Item>
 
-    @{
-        ViewData["Title"] = "Item de grind";
-    }
+@{
+    ViewData["Title"] = "Lista de Itens";
+}
 
-<h1>Lista de Itens</h1>
+<h2>@ViewData["Title"]</h2>
 
-<table class="table">
+<a asp-action="Create" class="btn btn-primary">Adicionar Item</a>
+<br />
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(x => x.Id)</th>
-            <th>@Html.DisplayNameFor(x => x.Nome)</th>
-            <th>@Html.DisplayNameFor(x => x.Preco)</th>
-           <!-- <th>@Html.DisplayNameFor(x => x.SpotId)</th>-->
-            <th>@Html.DisplayNameFor(x => x.Spot.Nome)</th>
+            <th>Nome</th>
+            <th>Preço</th>            
+            <th>SpotId</th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var item in Model)
+        @foreach (var item in Model)
         {
-        <tr>
-            <td>@Html.DisplayFor(model => item.Id)</td>
-            <td>@Html.DisplayFor(model => item.Nome)</td>
-            <td>@Html.DisplayFor(model => item.Preco)</td>
-           <!-- <td>@Html.DisplayFor(model => item.SpotId)</td>-->
-            <td>@Html.DisplayFor(model => item.Spot.Nome)</td>
-            <td>
-            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning">Editar Item</a>
-            <form method="post" asp-action="Delete">
-                <input type="text" asp-for="@item.Id" hidden/>
-                    <button type="submit" class="btn btn-danger" style="width: 60%;">Deletar</button>
-                    </form>
-            </td/>
-        </tr>
-        
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.Preco</td>                
+                <td>@item.SpotId</td>
+            </tr>
         }
-        
     </tbody>
 </table>
-<a asp-controller="Spot" asp-action="Index2" class="btn btn-secondary">Voltar</a>

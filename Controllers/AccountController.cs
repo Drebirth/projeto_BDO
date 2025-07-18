@@ -52,7 +52,7 @@ namespace projetoBDO.Controllers.accountController
                  {
                      await signInManager.SignInAsync(user, isPersistent: false);
                     //await userManager.AddClaimAsync(user, new Claim("PERMISSAO","ADMIN"));
-                    await userManager.AddToRoleAsync(user, "USER");
+                    await userManager.AddToRoleAsync(user, "ADMIN");
                     return RedirectToAction("Index", "Personagem");
                  }
 

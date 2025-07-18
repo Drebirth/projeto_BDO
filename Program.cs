@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using projetoBDO.Context;
 using projetoBDO.Repository;
 using projetoBDO.Repository.Interfaces;
+using projetoBDO.Repository.Itens;
 using projetoBDO.Repository.Spots;
 using projetoBDO.Services;
 
@@ -38,6 +39,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 builder.Services.AddScoped<ISpotRepository, SpotRepository>();
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
 builder.Services.AddScoped<SpotService>();
+builder.Services.AddScoped<ItemService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 {

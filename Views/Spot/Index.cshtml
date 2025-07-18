@@ -8,13 +8,14 @@
 
 <a asp-action="Create" class="btn btn-primary" >Adicionar Mapa</a>
 <br />
-<table class="">
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<th>Nome</th>
 			<th>Nível Recomendado</th>
 			<th>Ataque Recomendado</th>
 			<th>Defesa recomendada</th>
+			<th>Adicionar itens</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -25,6 +26,7 @@
 			<td>@mapas.NivelRecomendado</td>
 			<td>@mapas.AtaqueRecomendado</td>
 			<td>@mapas.DefesaRecomendada</td>			
+			<td><a asp-action="Create" asp-route-id="@mapas.Id" asp-controller="Item" >Itens</a></td>
 				<td><a asp-action="Details" asp-route-id="@mapas.Id" class="btn btn-primary">Detalhes</a></td>
 				<td><a asp-action="Edit" asp-route-id="@mapas.Id" class="btn btn-primary">Editar</a></td>
 				<td><a asp-action="Delete" asp-route-id="@mapas.Id" class="btn btn-primary">Excluir</a></td>
