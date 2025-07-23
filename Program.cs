@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using projetoBDO.Context;
 using projetoBDO.Repository;
+using projetoBDO.Repository.Grinds;
 using projetoBDO.Repository.Interfaces;
 using projetoBDO.Repository.Itens;
+using projetoBDO.Repository.Personagens;
 using projetoBDO.Repository.Spots;
 using projetoBDO.Services;
 
@@ -38,8 +40,12 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
         .AddEntityFrameworkStores<BdoContext>();
 builder.Services.AddScoped<ISpotRepository, SpotRepository>();
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
+builder.Services.AddScoped<IGrindRepository, GrindRepository>();
+builder.Services.AddScoped<GrindService>();
 builder.Services.AddScoped<SpotService>();
 builder.Services.AddScoped<ItemService>();
+builder.Services.AddScoped<IPersonagemRepository, PersonagemRepository>();
+builder.Services.AddScoped<PersonagemService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
 {

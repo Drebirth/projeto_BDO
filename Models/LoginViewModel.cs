@@ -5,7 +5,8 @@ namespace projetoBDO.Models;
 public class LoginViewModel
 {
     [Required(ErrorMessage = "O usuário é obrigatorio!")]
-    public string? Usuario  { get; set; }
+    public string? NomeDefamilia  { get; set; }
+
 
     [Required(ErrorMessage = "A senha é obrigatória")]
     [DataType(DataType.Password)]

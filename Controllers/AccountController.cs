@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using projetoBDO.Context;
 using projetoBDO.Models;
+using projetoBDO.Repository;
 
 namespace projetoBDO.Controllers.accountController
 {
@@ -15,12 +17,14 @@ namespace projetoBDO.Controllers.accountController
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly BdoContext _context;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager,BdoContext context)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
+            _context = context;
         }   
 
          public IActionResult Register()
@@ -43,7 +47,8 @@ namespace projetoBDO.Controllers.accountController
                 }
 
                 var user = new IdentityUser{
-                    UserName = model.Usuario
+                    UserName = model.NomeDeFamilia,
+                    Email = model.Email,
                 };
 
                 var result = await userManager.CreateAsync(user, model.Password);
@@ -53,6 +58,7 @@ namespace projetoBDO.Controllers.accountController
                      await signInManager.SignInAsync(user, isPersistent: false);
                     //await userManager.AddClaimAsync(user, new Claim("PERMISSAO","ADMIN"));
                     await userManager.AddToRoleAsync(user, "ADMIN");
+                    
                     return RedirectToAction("Index", "Personagem");
                  }
 
@@ -74,7 +80,7 @@ namespace projetoBDO.Controllers.accountController
         {
             if(ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(login.Usuario, 
+                var result = await signInManager.PasswordSignInAsync(login.NomeDefamilia, 
                     login.Password,login.RememberMe, false);
 
             if(result.Succeeded)
@@ -88,7 +94,7 @@ namespace projetoBDO.Controllers.accountController
 
         [HttpPost]
         public async Task<IActionResult> Logout()
-        {
+        {   
             await signInManager.SignOutAsync();
             return RedirectToAction("Login","Account");
         }

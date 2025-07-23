@@ -10,11 +10,16 @@ namespace projetoBDO.Models
     {
         
         [Required]
-        public string? Usuario { get; set; }
-        
+        public string? NomeDeFamilia { get; set; }
+
+        [Required(ErrorMessage = "O email é obrigatório")]
+        public string Email { get; set; }
+
         [Required]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
+
+   
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirme a senha")]
