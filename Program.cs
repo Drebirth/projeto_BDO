@@ -7,7 +7,7 @@ using projetoBDO.Repository.Grinds;
 using projetoBDO.Repository.Interfaces;
 using projetoBDO.Repository.Itens;
 using projetoBDO.Repository.Personagens;
-using projetoBDO.Repository.Spots;
+using projetoBDO.Repository.Mapas;
 using projetoBDO.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,11 +38,12 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
         .AddEntityFrameworkStores<BdoContext>();
-builder.Services.AddScoped<ISpotRepository, SpotRepository>();
+builder.Services.AddScoped<IMapaRepository, MapaRepository>();
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
 builder.Services.AddScoped<IGrindRepository, GrindRepository>();
+builder.Services.AddScoped<IGrindItensRepository, GrindItensRepository>();
 builder.Services.AddScoped<GrindService>();
-builder.Services.AddScoped<SpotService>();
+builder.Services.AddScoped<MapaService>();
 builder.Services.AddScoped<ItemService>();
 builder.Services.AddScoped<IPersonagemRepository, PersonagemRepository>();
 builder.Services.AddScoped<PersonagemService>();

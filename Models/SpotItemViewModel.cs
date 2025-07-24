@@ -1,19 +1,11 @@
 ﻿using projetoBDO.Entities;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace projetoBDO.Models
 {
-    public class SpotItemViewModel
+    public class MapaItemViewModel
     {
-        public string Nome { get; set; }
-        
-        [Required(ErrorMessage = "O campo Preco não pode ser vazio!")]
-        public decimal Preco { get; set; }
-
-        public int? SpotId { get; set; }
-
-        public Spot? Spot { get; set; }
-
-        public string? ImagemUrl { get; set; }
+        public Mapa Mapa { get; set; }
+        public IEnumerable<Item> Itens { get; set; }
     }
 }

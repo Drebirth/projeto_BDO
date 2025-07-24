@@ -11,7 +11,7 @@ namespace projetoBDO.Context
         public BdoContext(DbContextOptions<BdoContext> options) : base(options){ }
 
 
-        public DbSet<Spot> Spots { get; set; }
+        public DbSet<Mapa> Mapas { get; set; }
 
         public DbSet<Item> Itens { get; set; }
 
@@ -19,24 +19,31 @@ namespace projetoBDO.Context
 
         public DbSet<Grind> Grinds { get; set; }
 
-       /* protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Item>()
-            .Property(x => x.SpotId)
-            .ValueGeneratedNever();
+        public DbSet<ItensGrind> ItensGrinds { get; set; }
 
-        
-        }*/
-        
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+        /* protected override void OnModelCreating(ModelBuilder modelBuilder)
+         {
+             modelBuilder.Entity<Item>()
+             .Property(x => x.SpotId)
+             .ValueGeneratedNever();
 
-            modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(login => new { login.LoginProvider, login.ProviderKey });
-            
-            modelBuilder.Entity<Item>()
-            .Property(x => x.SpotId)
-            .ValueGeneratedNever();
+
+         }*/
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    base.OnModelCreating(modelBuilder);
+
+        //    modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(login => new { login.LoginProvider, login.ProviderKey });
+
+        //    modelBuilder.Entity<Item>()
+        //    .Property(x => x.SpotId)
+        //    .ValueGeneratedNever();
+        //}
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
         }
             
         

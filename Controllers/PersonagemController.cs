@@ -23,6 +23,7 @@ namespace projetoBDO.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            
             return View();
         }
 

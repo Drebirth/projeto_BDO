@@ -1,4 +1,5 @@
-﻿using projetoBDO.Entities;
+﻿using projetoBDO.Context;
+using projetoBDO.Entities;
 using projetoBDO.Repository.Personagens;
 using System.Security.Claims;
 
@@ -18,6 +19,7 @@ namespace projetoBDO.Services
         public async Task<IEnumerable<Personagem>> GetAllPersonagemAsync()
         {
             var userName = _httpContext.HttpContext?.User?.FindFirst(ClaimTypes.Name)?.Value;
+            var personagens = _repository.GetAllAsync().Result.Where(personagens => personagens.NomeDeFamilia == userName).ToList();
             return await _repository.GetAllAsync(userName);
 
         }
@@ -38,6 +40,8 @@ namespace projetoBDO.Services
             {
                 throw new ArgumentNullException(nameof(personagem), "Personagem cannot be null.");
             }
+            var userName = _httpContext.HttpContext?.User?.FindFirst(ClaimTypes.Name)?.Value;
+            personagem.NomeDeFamilia = userName;
             await _repository.CreateAsync(personagem);
         }
 
@@ -63,6 +67,17 @@ namespace projetoBDO.Services
                 throw new KeyNotFoundException($"Personagem with ID {id} not found.");
             }
             await _repository.DeleteAsync(personagem);
+        }
+
+        public async Task<Personagem> NomeDeFamilia(string NomeFamilia)
+        {
+            
+            var nome =  _httpContext.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+            Personagem NovoPersonagem = new Personagem { NomeDeFamilia = nome };
+            return NovoPersonagem;
+
+
+
         }
     }
 }

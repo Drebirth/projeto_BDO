@@ -17,10 +17,12 @@ public class Item
     
     [Required(ErrorMessage = "O campo Preco não pode ser vazio!")]
     public decimal Preco { get; set; }
-    
+
+    public int Quantidade { get; set; }
+
     public int? SpotId { get; set; }
     
-    public ICollection<Spot>? Spots { get; set; }
+    public ICollection<Mapa>? Spots { get; set; }
 
     public string? ImagemUrl { get; set; }
 

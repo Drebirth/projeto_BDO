@@ -17,7 +17,7 @@ public class Grind
 
     public int PersonagemId { get; set; }
 
-   // public string? NomePersonagem { get; set; }
+    public string? NomePersonagem { get; set; }
 
     public string Mapa { get; set; }
 
@@ -26,6 +26,8 @@ public class Grind
     //public ICollection<ItensGrind> Itens { get; set; }
 
     public decimal? ValorTotal { get; set; } 
+
+    public ICollection<ItensGrind>? itensGrinds { get; set; }
 
 
 

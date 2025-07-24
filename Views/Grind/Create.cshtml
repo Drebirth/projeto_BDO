@@ -8,12 +8,12 @@
 
 <form asp-action="Create" method="post">
     <div class="mb-3">
-        @* <label asp-for="SpotId" class="form-label">Spot</label> *@
-        <input asp-for="SpotId" class="form-control" hidden />@* asp-items="@(new SelectList(Model.Spots, "Id", "Nome"))"> *@
+        @* <label asp-for="MapaId" class="form-label">Mapa</label> *@
+        <input asp-for="MapaId" class="form-control" hidden />@* asp-items="@(new SelectList(Model.Mapas, "Id", "Nome"))"> *@
     </div>
     <div class="mb-3">
-        <label asp-for="SpotNome" class="form-label">Mapa</label>
-		<input asp-for="SpotNome" class="form-control" readonly />
+        <label asp-for="MapaNome" class="form-label">Mapa</label>
+		<input asp-for="MapaNome" class="form-control" readonly />
     </div>
     <div class="mb-3">
        <label asp-for="PersonagemId" class="form-label">Personagem</label>
@@ -22,12 +22,12 @@
 		</select>
     </div>
     <div class="mb-3">
-        @for (int i = 0; i < Model.Itens.Count; i++)
+         @for (int i = 0; i < Model.Itens.Count; i++)
         {
             <input asp-for="Itens[@i].Nome" class="form-control" />
             <input asp-for="Itens[@i].Preco" class="form-control" />
             <input asp-for="Itens[@i].ImagemUrl" class="form-control" hidden />
-            <input asp-for="Quantidade" />
+            <input asp-for="Itens[@i].Quantidade" />
         }
     </div>
    

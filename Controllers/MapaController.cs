@@ -1,20 +1,20 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using projetoBDO.Entities;
 using projetoBDO.Services;
 using System.Threading.Tasks;
 
 namespace projetoBDO.Controllers
 {
-    public class MapaController2 : Controller
+    public class MapaController : Controller
     {
         private readonly MapaService _mapaService;
 
-        public MapaController2(MapaService mapaService)
+        public MapaController(MapaService mapaService)
         {
             _mapaService = mapaService;
         }
 
-        public async Task<IActionResult> Index2()
+        public async Task<IActionResult> Index()
         {
             var mapas = await _mapaService.GetAllMapasAsync();
             return View(mapas);
@@ -31,7 +31,7 @@ namespace projetoBDO.Controllers
             if (ModelState.IsValid)
             {
                 await _mapaService.CreateMapaAsync(mapa);
-                return RedirectToAction(nameof(Index2));
+                return RedirectToAction(nameof(Index));
             }
             return View(mapa);
         }
@@ -52,7 +52,7 @@ namespace projetoBDO.Controllers
             if (ModelState.IsValid)
             {
                 await _mapaService.UpdateMapaAsync(mapa);
-                return RedirectToAction(nameof(Index2));
+                return RedirectToAction(nameof(Index));
             }
             return View(mapa);
         }
@@ -71,7 +71,7 @@ namespace projetoBDO.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _mapaService.DeleteMapaAsync(id);
-            return RedirectToAction(nameof(Index2));
+            return RedirectToAction(nameof(Index));
         }
     }
 }

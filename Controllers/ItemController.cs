@@ -9,9 +9,9 @@ namespace projetoBDO.Controllers
     {
 
         private readonly ItemService _itemService;
-        private readonly SpotService _spotService;
+        private readonly MapaService _spotService;
 
-        public ItemController(ItemService itemService, SpotService spotService)
+        public ItemController(ItemService itemService, MapaService spotService)
         {
             _itemService = itemService;
             _spotService = spotService;
@@ -28,7 +28,7 @@ namespace projetoBDO.Controllers
         //[HttpGet("id")]
         public IActionResult Create(int id)
         {   
-            var spot = _spotService.GetSpotPorId(id).Result;
+            var spot = _spotService.GetMapaPorId(id).Result;
             Item item = new Item
             {
                 SpotId = spot.Id

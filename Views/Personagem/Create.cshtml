@@ -5,7 +5,11 @@
 }
 
 <form asp-action="Create" method="post">
-        <input asp-for="NomeDeFamilia" value="@User" />
+       
+        <div>
+		<label class="form-label">Nome de Família</label>
+		<input class="form-control" asp-for="NomeDeFamilia" value="@User.Identity.Name"/>
+        </div>
         <div class="row mb-3">
             <label class="form-label">Nome</label>
             <input class="form-control" asp-for="Nome"/>

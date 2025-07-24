@@ -11,13 +11,13 @@ namespace projetoBDO.Controllers
     {
 
         private readonly GrindService _grindService;
-        private readonly SpotService _spotService;
+        private readonly MapaService _spotService;
         private readonly ItemService _item;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly BdoContext _context;
 
 
-        public GrindController(GrindService grindService, SpotService spotService, ItemService item, IHttpContextAccessor httpContextAccessor,BdoContext context)
+        public GrindController(GrindService grindService, MapaService spotService, ItemService item, IHttpContextAccessor httpContextAccessor,BdoContext context)
         {
             _grindService = grindService;
             _spotService = spotService;
@@ -32,27 +32,12 @@ namespace projetoBDO.Controllers
             return View();
         }
 
-        public IActionResult Create(int id)
+        public async Task<IActionResult> Create(int id)
         {
-            var spotd =  _spotService.GetSpotPorId(id);
-            var itens = _item.GetAllItemsAsync().Result.Where(I => I.SpotId == id).ToList();
-            //var logado = _httpContextAccessor.HttpContext.User.FindAll(ClaimTypes.NameIdentifier).FirstOrDefault()?.Value;
+            // Buscar o usuário logado
             var logado = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
-            var personagens = _context.Personagens.Where(p => p.NomeDeFamilia == logado).ToList();
-            GrindViewModel model = new GrindViewModel
-            {
-                SpotId = id,
-                SpotNome = spotd.Result.Nome,
-                //Itens = (List<ItensGrind>)spotd.Result.Itens,
-                Itens = itens,
-                Personagens = personagens,
-                
-                
-
-            };
-            
+            var model = await _grindService.MontarGrindViewModelAsync(id, logado);
             return View(model);
-
         }
 
         [HttpPost]
@@ -60,21 +45,20 @@ namespace projetoBDO.Controllers
         {
             if(ModelState.IsValid)
             {
-                decimal subtotal = 0;
-                foreach (var item in model.Itens)
-                {
-                    subtotal += subtotal + (item.Preco * model.Quantidade);
-                }
+                // Calcula o subtotal usando o service
+               decimal subtotal = _grindService.CalcularSubTotal(model.Itens);
 
-               await  _grindService.CreateAsync(new Grind
+               
+                await  _grindService.CreateAsync(new Grind
                 {
                     PersonagemId = model.PersonagemId,
-                    SpotId = model.SpotId,
+                    SpotId = model.MapaId,
                     ValorTotal = subtotal,
-                    Mapa = model.SpotNome,
-                    
+                    Mapa = model.MapaNome,
+                   
+                }, model.Itens);
+                //await _grindService.CreateAsyncItens(model.Itens, model.Quantidade);
 
-               });
                 return RedirectToAction("Index");
             }
             return View(model);

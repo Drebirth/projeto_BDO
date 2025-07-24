@@ -8,7 +8,7 @@ using projetoBDO.Entities;
 namespace projetoBDO.Entities;
 
 
-public class Spot
+public class Mapa
 {
     [Key]
     public int Id { get; set; }

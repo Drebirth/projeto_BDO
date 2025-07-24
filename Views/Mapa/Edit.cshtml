@@ -1,4 +1,4 @@
-@model projetoBDO.Entities.Spot
+@model projetoBDO.Entities.Mapa
 
 @{
     ViewData["Title"] = "Editando local de grind";
@@ -8,7 +8,7 @@
 
 <form asp-action="Edit" method="post">    
     <div class="mb-3">
-        <label asp-for="Nome" class="form-label">Nome do Spot</label>
+        <label asp-for="Nome" class="form-label">Nome do Mapa</label>
         <input asp-for="Nome" class="form-control" />
         <span asp-validation-for="Nome" class="text-danger"></span>
     </div>
