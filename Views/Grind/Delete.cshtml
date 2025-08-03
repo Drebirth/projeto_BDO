@@ -1,0 +1,12 @@
+﻿@model Grind
+
+@{
+	ViewData["Title"] = "Delete Grind";
+}
+
+<h2>Delete Grind</h2>
+
+<form asp-action="Delete" method="post">
+	<input type="hidden" asp-for="Id" />
+	<button type="submit">Tem certeza que deseja deletar?</button>
+</form>

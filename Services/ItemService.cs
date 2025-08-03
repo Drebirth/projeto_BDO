@@ -25,7 +25,15 @@ namespace projetoBDO.Services
 
         public async Task<Item> CreateItemAsync(Item item)
         {
-            await _itemRepository.CreateAsync(item);
+            var Item = new Item
+            {
+                Nome = item.Nome,
+                Preco = item.Preco,
+                Quantidade = 0,
+                SpotId = item.SpotId,
+                ImagemUrl = item.ImagemUrl
+            };
+            await _itemRepository.CreateAsync(Item);
             return item;
         }
 

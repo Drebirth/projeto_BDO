@@ -7,6 +7,7 @@
 <h2>@ViewData["Title"]</h2>
 
 <form asp-action="Create" method="post">
+      <div asp-validation-summary="All" class="text-danger"></div>  
     <div class="mb-3">
         @* <label asp-for="MapaId" class="form-label">Mapa</label> *@
         <input asp-for="MapaId" class="form-control" hidden />@* asp-items="@(new SelectList(Model.Mapas, "Id", "Nome"))"> *@
@@ -20,18 +21,56 @@
         <select asp-for="PersonagemId" class="form-select" asp-items="@(new SelectList(Model.Personagens, "Id", "Nome"))">
             <option value="">Selecione um personagem</option>
 		</select>
+        <span asp-validation-for="PersonagemId" class="text-danger"></span>
     </div>
-    <div class="mb-3">
-         @for (int i = 0; i < Model.Itens.Count; i++)
+    <div class="row g-3">
+
+        @for (int i = 0; i < Model.Itens.Count; i++)
         {
-            <input asp-for="Itens[@i].Nome" class="form-control" />
-            <input asp-for="Itens[@i].Preco" class="form-control" />
-            <input asp-for="Itens[@i].ImagemUrl" class="form-control" hidden />
-            <input asp-for="Itens[@i].Quantidade" />
+            <div class="col-4">
+                <label class="form-label">Item</label>
+                <input asp-for="Itens[@i].Nome" class="form-control" readonly />
+            </div>
+            <div class="col-4">
+                
+                @if(Model.Itens[i].ItemMercado == true)
+                {
+                    <label class="form-label">Valor</label>
+                    <input id="preco-input-@i" class="form-control preco-input" type="text" placeholder="Preco base sugerido @Model.Itens[i].Preco?.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))" />
+                    <input asp-for="Itens[@i].Preco" id="preco-@i" type="text" hidden />
+                }
+                
+                else
+                {
+                    <label class="form-label">Valor</label>
+                      <input asp-for="Itens[@i].Preco" class="form-control" type="number" readonly hidden />  
+                     <input class="form-control" type="text" value="@Model.Itens[@i].Preco?.ToString("C", System.Globalization.CultureInfo.GetCultureInfo("pt-BR"))" readonly /> 
+                }
+            </div>
+            <div class="col-4">
+
+                <label class="form-label">Quantidade</label>
+                <input asp-for="Itens[@i].Quantidade" class="form-control" />
+                <span asp-validation-for="Itens[i].Quantidade" class="text-danger" ></span>
+
+            </div>
+         
         }
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Adicionar Grind</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </div>
     </div>
-   
-    <button type="submit" class="btn btn-primary">Salvar</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+
+
 </form>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+  
+}
 

@@ -16,7 +16,9 @@ namespace projetoBDO.Entities
 
         public int? Quantidade { get; set; }
 
-        public decimal? SubTotal { get; set; }
+        public decimal? PrecoUnitario { get; set; }
+
+        public decimal? Total { get; set; }
 
         //public decimal Subtotal => Itens.Sum(i => i.Preco * Quantidade);
     }

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using projetoBDO.Entities;
 using projetoBDO.Services;
 using System.Threading.Tasks;
 
 namespace projetoBDO.Controllers
 {
+    [Authorize]
     public class MapaController : Controller
     {
         private readonly MapaService _mapaService;

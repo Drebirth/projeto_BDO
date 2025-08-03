@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using projetoBDO.Entities;
 using projetoBDO.Models;
 using projetoBDO.Services;
 
 namespace projetoBDO.Controllers
 {
+    [Authorize]
     public class ItemController : Controller
     {
 

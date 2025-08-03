@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using projetoBDO.Entities;
 using projetoBDO.Services;
 
 namespace projetoBDO.Controllers
 {
+    [Authorize]
     public class PersonagemController : Controller
     {
         private readonly PersonagemService _personagemService;

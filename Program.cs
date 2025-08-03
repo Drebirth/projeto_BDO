@@ -52,8 +52,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 {
     options.Cookie.HttpOnly = true; // HttpOnly evita que o cookie seja acessado via JavaScript
     options.Cookie.Name = "AspNetCore.Cookies";
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(3);
-    options.SlidingExpiration = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
+    options.SlidingExpiration = false; 
+    options.LoginPath = "/Account/Login"; // Redireciona para a página de login se não estiver autenticado
+    options.AccessDeniedPath = "/Account/AccessDenied"; // Redireciona para a página de acesso negado se não tiver permissão
+    options.LogoutPath = "/Account/Logout"; // Redireciona para a página de logout
 });
 
 var app = builder.Build();

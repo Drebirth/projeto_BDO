@@ -1,8 +1,11 @@
 ﻿using projetoBDO.Entities;
 using projetoBDO.Models;
 using projetoBDO.Repository.Grinds;
+using System.Drawing;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace projetoBDO.Services
 {
@@ -33,29 +36,50 @@ namespace projetoBDO.Services
         {
             return await _IGrindRepository.GetAsync(id);
         }
+     
         public async Task CreateAsync(Grind grind, List<Item> itens)
         {
             var personagem = await _personagemService.GetPersonagemByIdAsync(grind.PersonagemId);
-            grind.NomePersonagem   = personagem.Nome;            
+            grind.NomePersonagem = personagem.Nome;
+            grind.ValorTotal = CalcularSubTotal(itens); // Corrige o valor total para centavos
             await _IGrindRepository.CreateAsync(grind);
-           
+            decimal subTotal = 0;
             for (int i = 0; i < itens.Count; i++)
             {
-                
-                var itensGrind = new ItensGrind
+                if (itens[i].Quantidade > 0)
                 {
-                    GrindId = grind.Id,
-                    ItemNome = itens[i].Nome,
-                    Quantidade = itens[i].Quantidade,
-                    SubTotal = itens[i].Quantidade * itens[i].Preco ,
-                   
-                };
-                await _IGrindItensRepository.CreateAsync(itensGrind);
-                
+                    string valorString = itens[i].Preco.ToString(); // Se Preco for nulo, atribui 0 
+                    decimal valorCorrigido;
+                    if(!valorString.EndsWith("0"))
+                    {
+                        valorCorrigido = (decimal)(itens[i].Preco / 100m);
+                        
+                        var itensGrind = new ItensGrind
+                        {
+                            GrindId = grind.Id,
+                            ItemNome = itens[i].Nome,
+                            Quantidade = itens[i].Quantidade,
+                            PrecoUnitario = valorCorrigido,
+                            Total = Math.Round((decimal)(itens[i].Quantidade * valorCorrigido), 2, MidpointRounding.AwayFromZero),
+                        };
+                        await _IGrindItensRepository.CreateAsync(itensGrind);
+                    }
+                    else
+                    {
+                        var itensGrind = new ItensGrind
+                        {
+                            GrindId = grind.Id,
+                            ItemNome = itens[i].Nome,
+                            Quantidade = itens[i].Quantidade,
+                            PrecoUnitario = Math.Round(itens[i].Preco ?? 0m, 2, MidpointRounding.AwayFromZero),
+                            Total = Math.Round((decimal)(itens[i].Quantidade * itens[i].Preco), 2, MidpointRounding.AwayFromZero),
+                        };
+                        await _IGrindItensRepository.CreateAsync(itensGrind);
+                    }
+                }
+
             }
-
         }
-
 
 
         public async Task UpdateAsync(Grind grind)
@@ -66,7 +90,12 @@ namespace projetoBDO.Services
         {
             var grind = await _IGrindRepository.GetAsync(id);
             await _IGrindRepository.DeleteAsync(grind);
-        }
+           var itensGrind =  await _IGrindItensRepository.GetFindGrindForId(id);
+            foreach (var item in itensGrind)
+            {
+                await _IGrindItensRepository.DeleteAsync(item);
+            }
+            }
 
         // Calcula o subtotal de acordo com a quantidade e o preço de cada item
         public decimal CalcularSubTotal(List<Item> itens)
@@ -75,11 +104,25 @@ namespace projetoBDO.Services
             {
                 throw new ArgumentException("A lista de itens não pode ser nula ou vazia.", nameof(itens));
             }
-           
             decimal subtotal = 0;
+          
+          
+
+
+
             foreach (var item in itens)
             {
-                subtotal += item.Preco * item.Quantidade;
+               var valorString = item.Preco.ToString();
+                if (item.Quantidade >= 1 && !valorString.EndsWith("0"))
+                {
+                    //decimal precoCorrigido = (item.Preco.HasValue ? item.Preco.Value : 0m)/100m; // Corrige o preço para centavos
+                    decimal precoCorrigido = (decimal)(item.Preco / 100m);
+                    subtotal += (decimal)(precoCorrigido * item.Quantidade);
+                }
+                else
+                {
+                    subtotal += (item.Preco * item.Quantidade) ?? 0m; // Se Preco for nulo, atribui 0
+                }
             }
             return subtotal;
         }
@@ -87,7 +130,7 @@ namespace projetoBDO.Services
         public async Task<GrindViewModel> MontarGrindViewModelAsync(int spotId, string nomeDeFamilia)
         {
             var spot = await _spotService.GetMapaPorId(spotId);
-            var itens = (await _itemService.GetAllItemsAsync()).Where(i => i.SpotId == spotId).ToList();
+            var itens = (await _itemService.GetAllItemsAsync()).Where(i => i.SpotId == spotId).OrderByDescending(i => i.ItemMercado == true ).ToList();
             var personagens = await _personagemService.GetAllPersonagemAsync();
             var personagensFiltrados = personagens.Where(p => p.NomeDeFamilia == nomeDeFamilia).ToList();
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using projetoBDO.Context;
 using projetoBDO.Entities;
 using projetoBDO.Models;
@@ -7,29 +8,27 @@ using System.Security.Claims;
 
 namespace projetoBDO.Controllers
 {
+    [Authorize]
     public class GrindController : Controller
     {
 
         private readonly GrindService _grindService;
-        private readonly MapaService _spotService;
-        private readonly ItemService _item;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly BdoContext _context;
+     
 
 
-        public GrindController(GrindService grindService, MapaService spotService, ItemService item, IHttpContextAccessor httpContextAccessor,BdoContext context)
+        public GrindController(GrindService grindService,   IHttpContextAccessor httpContextAccessor)
         {
             _grindService = grindService;
-            _spotService = spotService;
-            _item = item;
             _httpContextAccessor = httpContextAccessor;
-            _context = context;
+           
         }
 
         // GET: Grind
         public IActionResult Index()
         {
-            return View();
+            var grinds = _grindService.GetAllAsync().Result;
+            return View(grinds);
         }
 
         public async Task<IActionResult> Create(int id)
@@ -43,25 +42,34 @@ namespace projetoBDO.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(GrindViewModel model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                // Calcula o subtotal usando o service
-               decimal subtotal = _grindService.CalcularSubTotal(model.Itens);
 
-               
-                await  _grindService.CreateAsync(new Grind
+                await _grindService.CreateAsync(new Grind
                 {
-                    PersonagemId = model.PersonagemId,
+                    PersonagemId = (int)model.PersonagemId,
                     SpotId = model.MapaId,
-                    ValorTotal = subtotal,
                     Mapa = model.MapaNome,
-                   
+
                 }, model.Itens);
-                //await _grindService.CreateAsyncItens(model.Itens, model.Quantidade);
 
                 return RedirectToAction("Index");
             }
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var grind = await _grindService.GetByIdAsync(id);
+           return View(grind);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _grindService.DeleteAsync(id);
+            return RedirectToAction("Index");
         }
     }
 }
