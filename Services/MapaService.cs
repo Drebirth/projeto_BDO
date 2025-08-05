@@ -1,4 +1,5 @@
 ﻿using projetoBDO.Entities;
+using projetoBDO.Paginacao;
 using projetoBDO.Repository.Mapas;
 
 namespace projetoBDO.Services
@@ -16,6 +17,14 @@ namespace projetoBDO.Services
         {
             return await _mapaRepository.GetAllAsync();
         }
+
+        public async Task<PaginatedList<Mapa>> GetMapasPagina(int pageIndex = 1, int pageSize = 15)
+        {
+            // Utilizo o metodo CreateAsync para criar a lista paginada
+            // lista já transformada em Asqueryable
+            var mapas = _mapaRepository.GetAllAsyncPaginacao();
+            return await PaginatedList<Mapa>.CreateAsync(mapas, pageIndex, pageSize);
+        }   
 
         public async Task<Mapa> CreateMapaAsync(Mapa mapa)
         {

@@ -11,5 +11,6 @@ namespace projetoBDO.Repository.Mapas
         Task CreateAsync(Mapa mapa);
         Task UpdateAsync(Mapa mapa);
         Task DeleteAsync(Mapa mapa);
+        IQueryable<Mapa> GetAllAsyncPaginacao();
     }
 }

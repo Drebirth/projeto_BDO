@@ -1,8 +1,11 @@
-﻿using projetoBDO.Entities;
+﻿using PagedList;
+using projetoBDO.Entities;
 using projetoBDO.Models;
+using projetoBDO.Paginacao;
 using projetoBDO.Repository.Grinds;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -31,6 +34,30 @@ namespace projetoBDO.Services
         public async Task<IEnumerable<Grind>> GetAllAsync()
         {
             return await _IGrindRepository.GetAllAsync();
+   
+
+        }
+
+        public async Task<PaginatedList<Grind>> GetGrindsPagina(int pageIndex = 1, int pageSize = 15)
+        {
+           // // Solicito todos os grinds
+           //var grinds = await _IGrindRepository.GetAllAsync();
+           // // Conto a quantidade de grinds
+           // var count = grinds.Count();
+           // // Ordeno o grind  pelo ID pageIndex= Posicao 1 - 1 * Tamanho da pagina
+           // var items = grinds
+           //     .OrderBy(c => c.Id)
+           //     .Skip((pageIndex - 1) * pageSize)
+           //     .Take(pageSize)
+           //     .ToList();
+           // // Retorno a lista paginada
+           // return new PaginatedList<Grind>(items, count, pageIndex, pageSize);
+
+            // Utilizo o metodo CreateAsync para criar a lista paginada
+            // lista já transformada em Asqueryable
+            var grinds =  _IGrindRepository.GetAllAsyncPaginacao();
+            return await PaginatedList<Grind>.CreateAsync(grinds, pageIndex, pageSize);
+
         }
         public async Task<Grind> GetByIdAsync(int id)
         {

@@ -8,6 +8,11 @@ namespace projetoBDO.Repository.Mapas
     {
        
         public MapaRepository(BdoContext banco) : base(banco) { }
-               
+
+        public IQueryable<Mapa> GetAllAsyncPaginacao()
+        {
+           var mapas = _context.Mapas.AsQueryable();
+            return mapas;
+        }
     }
 }

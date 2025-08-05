@@ -25,6 +25,7 @@ public class Grind
 
     //public ICollection<ItensGrind> Itens { get; set; }
 
+    [DisplayFormat(DataFormatString ="{0:C2}")]
     public decimal? ValorTotal { get; set; } 
 
     public ICollection<ItensGrind>? itensGrinds { get; set; }

@@ -1,5 +1,5 @@
 ﻿@using projetoBDO.Paginacao;
-@model  PaginatedList<projetoBDO.Entities.Mapa>
+@model  PaginatedList<Mapa>
 
 
     <h2>Lista de Mapas</h2>
@@ -22,17 +22,17 @@
     }
 </table>
     <div>
-        Pagína @(Model.PaginaAtual) de @(Model.TotalPages)
+        Pagína @(Model.PageIndex) de @(Model.TotalPages)
     </div>
 
     @if (Model.HasPreviousPage)
     {
-        <a asp-action="Index2" asp-route-pageNumber="@(Model.PaginaAtual - 1)">Antes</a>
+    <a asp-action="Index2" asp-route-pageNumber="@(Model.PageIndex - 1)">Antes</a>
     }
 
     @if (Model.HasNextPage)
     {
-        <a asp-action="Index2" asp-route-pageNumber="@(Model.PaginaAtual + 1)">Depois</a>
+    <a asp-action="Index2" asp-route-pageNumber="@(Model.PageIndex + 1)">Depois</a>
     }
 
 

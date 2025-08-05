@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using projetoBDO.Context;
 using projetoBDO.Entities;
 using projetoBDO.Models;
@@ -25,10 +26,26 @@ namespace projetoBDO.Controllers
         }
 
         // GET: Grind
-        public IActionResult Index()
+        public  async Task<IActionResult> Index(int page =1)
         {
-            var grinds = _grindService.GetAllAsync().Result;
+            var grinds = await _grindService.GetGrindsPagina(page, 10);
             return View(grinds);
+        }
+        public async Task<IActionResult> Index2(int page = 1, int pageSize = 10)
+        {
+            var allItems = await _grindService.GetAllAsync();  // retorna List<Grind>
+
+            var totalItems = allItems.Count();
+            var paginacao = allItems
+                .OrderBy(c => c.Id)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.TotalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+            ViewBag.CurrentPage = page;
+          
+            return View(paginacao);
         }
 
         public async Task<IActionResult> Create(int id)

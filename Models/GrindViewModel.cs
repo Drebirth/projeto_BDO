@@ -16,5 +16,7 @@ namespace projetoBDO.Models
        
         public int? Quantidade { get; set; }
        public decimal? ValorTotal { get; set; }
+
+
     }
 }

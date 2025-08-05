@@ -1,8 +1,8 @@
-﻿@model IEnumerable<Grind>
-
+﻿
+@model PaginatedList<Grind>
 <h2>Lista de grind</h2>
 
-<table>
+<table class="table table-striped">
 	<thead>	
 		<tr>
 			<th>Mapa</th>
@@ -18,9 +18,27 @@
 			<tr>
 				<td>@grind.Mapa</td>
 				<td>@grind.NomePersonagem</td>
-				<td>@grind.ValorTotal</td>
-				<td><a asp-action="Delete" asp-route-id="@grind.Id" class="btn btn-danger">Deletar</a></td>
+				<td>
+					 @Html.DisplayFor(m => grind.ValorTotal) 
+					
+
+				</td>
+				
 			</tr>
 		}
 	</tbody>
 </table>
+
+<div>
+	Página @Model.PageIndex de @Model.TotalPages
+	@if (Model.HasPreviousPage)
+	{
+		<a asp-action="Index" asp-route-page="@(Model.PageIndex - 1)">Anterior</a>
+	}
+	@if (Model.HasNextPage)
+	{
+		<a asp-action="Index" asp-route-page="@(Model.PageIndex + 1)">Próxima</a>
+	}
+</div>
+
+
