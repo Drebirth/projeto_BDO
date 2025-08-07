@@ -27,7 +27,7 @@ namespace projetoBDO.Controllers
             return View(itens);
         }
 
-        //[HttpGet("id")]
+        [HttpGet("item/{id}")]
         public IActionResult Create(int id)
         {   
             var spot = _spotService.GetMapaPorId(id).Result;

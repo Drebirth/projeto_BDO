@@ -18,13 +18,21 @@ namespace projetoBDO.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var mapas = await _mapaService.GetAllMapasAsync();
+            var mapas = await _mapaService.GetMapasPagina();
             return View(mapas);
         }
 
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpGet("id")]
+        public async Task<IActionResult> Details(int id)
+        {
+            var mapa = await _mapaService.GetMapaPorId(id);
+          
+            return View(mapa);
         }
 
         [HttpPost]

@@ -7,10 +7,12 @@ namespace projetoBDO.Services
     public class MapaService
     {
         private readonly IMapaRepository _mapaRepository;
+        private readonly ItemService _itemService;
 
-        public MapaService(IMapaRepository mapaRepository)
+        public MapaService(IMapaRepository mapaRepository, ItemService itemService)
         {
             _mapaRepository = mapaRepository;
+            _itemService = itemService;
         }
 
         public async Task<IEnumerable<Mapa>> GetAllMapasAsync()
@@ -41,11 +43,19 @@ namespace projetoBDO.Services
         public async Task<Mapa> GetMapaPorId(int id)
         {
             var mapa = await _mapaRepository.GetAsync(id);
-            if (mapa == null)
+            var itemMapa = await _itemService.GetItensBySpot(id);
+            
+            var mapaCompleto = new Mapa
             {
-                throw new KeyNotFoundException($"Mapa com  ID {id} não encontrado!.");
-            }
-            return mapa;
+                Id = mapa.Id,
+                Nome = mapa.Nome,
+                NivelRecomendado = mapa.NivelRecomendado,
+                AtaqueRecomendado = mapa.AtaqueRecomendado,
+                DefesaRecomendada = mapa.DefesaRecomendada,
+                ImagemUrl = mapa.ImagemUrl,
+                Itens = itemMapa.ToList()
+            };
+            return mapaCompleto;
         }
 
         public async Task<Mapa> UpdateMapaAsync(Mapa mapa)

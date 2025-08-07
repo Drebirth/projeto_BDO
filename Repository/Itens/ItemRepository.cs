@@ -1,13 +1,26 @@
-﻿using projetoBDO.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using projetoBDO.Context;
 using projetoBDO.Entities;
-using projetoBDO.Repository.Interfaces;
 
 namespace projetoBDO.Repository.Itens
 {
-    public class ItemRepository : Repository<Item>, IItemRepository
+    public class ItemRepository : Repository<Item>, IItensRepository
     {
         public ItemRepository(BdoContext context) : base(context)
         {
+        }
+
+        public IQueryable<Item> GetAllAsyncPaginacao()
+        {
+            var itens = _context.Itens.AsQueryable();
+            return itens;
+        }
+
+        public async Task<IEnumerable<Item>> GetItemsBySpotIdAsync(int spotId)
+        {
+            return await _context.Itens
+                .Where(i => i.SpotId == spotId)
+                .ToListAsync();
         }
     }
 }

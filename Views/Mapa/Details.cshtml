@@ -1,0 +1,46 @@
+﻿@model Mapa
+
+<h2>Detalhes do Mapa</h2>
+
+
+<br />
+
+<div class="row g-3">
+
+<div class="col-12">
+    <label>Mapa</label>
+	<input type="text" class="form-control" value="@Model.Nome"  />
+</div>
+<div class="col-4">
+    <label>Nível Recomendado</label>
+		<input  class="form-control" value="@Model.NivelRecomendado"  />
+</div>
+<div class="col-4">
+    <label>Ataque Recomendado</label>
+		<input  class="form-control" value="@Model.AtaqueRecomendado"  />
+</div>
+<div class="col-4">
+    <label>Defesa Recomendada</label>
+		<input class="form-control" value="@Model.DefesaRecomendada"  />
+</div>
+<div class="row g-3">
+    @foreach(var item in Model.Itens)
+        {
+            <div class="col-6">
+                <label class="col-form-label">Nome Item</label>
+			    <input type="text" class="form-control" value="@item.Nome"  />
+            </div>
+            <div class="col-6">
+                <label class="col-form-label">Preço</label>
+                <input type="text" class="form-control" value="@item.Preco"  />
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+<div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+    <a asp-action="Index" class="btn btn-secondary" style="width: 150px">Voltar</a>
+</div>

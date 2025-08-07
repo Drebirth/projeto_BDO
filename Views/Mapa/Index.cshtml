@@ -1,12 +1,11 @@
-﻿@model IEnumerable<Mapa>
-
+﻿@* @model IEnumerable<Mapa> *@
+@model PaginatedList<Mapa>
 <h2>Lista de Mapas</h2>
 
 @{
 	ViewData["Title"] = "Lista de Mapas";
 }
 
-<a asp-action="Create" class="btn btn-primary" >Adicionar Mapa</a>
 <br />
 <table class="table table-striped">
 	<thead>
@@ -15,7 +14,8 @@
 			<th>Nível Recomendado</th>
 			<th>Ataque Recomendado</th>
 			<th>Defesa recomendada</th>
-			<th>Adicionar itens</th>
+			<th>Adicionar Grind</th>
+			<th>Detalhes sobre o mapa</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -26,13 +26,24 @@
 			<td>@mapas.NivelRecomendado</td>
 			<td>@mapas.AtaqueRecomendado</td>
 			<td>@mapas.DefesaRecomendada</td>			
-			<td><a asp-action="Create" asp-route-id="@mapas.Id" asp-controller="Item" >Itens</a></td>
+			@* <td><a asp-action="Create" asp-route-id="@mapas.Id" asp-controller="Item" >Itens</a></td> *@
 				<td><a asp-action="Create" asp-route-id="@mapas.Id" asp-controller="Grind" class="btn btn-primary">Grind</a></td>
 				<td><a asp-action="Details" asp-route-id="@mapas.Id" class="btn btn-primary">Detalhes</a></td>
-				<td><a asp-action="Edit" asp-route-id="@mapas.Id" class="btn btn-primary">Editar</a></td>
-				<td><a asp-action="Delete" asp-route-id="@mapas.Id" class="btn btn-primary">Excluir</a></td>
+			@* 	<td><a asp-action="Edit" asp-route-id="@mapas.Id" class="btn btn-primary">Editar</a></td> *@
+		@* 		<td><a asp-action="Delete" asp-route-id="@mapas.Id" class="btn btn-primary">Excluir</a></td> *@
 		</tr>
 		}
 	</tbody>
 </table>
 
+<div>
+	Página @Model.PageIndex de @Model.TotalPages
+	@if (Model.HasPreviousPage)
+	{
+		<a asp-action="Index" asp-route-page="@(Model.PageIndex - 1)">Anterior</a>
+	}
+	@if (Model.HasNextPage)
+	{
+		<a asp-action="Index" asp-route-page="@(Model.PageIndex + 1)">Próxima</a>
+	}
+</div>

@@ -6,7 +6,8 @@ namespace projetoBDO.Repository.Itens
     {
         // Define additional methods specific to Item repository if needed
         // For example:
-        // Task<IEnumerable<Item>> GetItemsBySpotIdAsync(int spotId);
+         Task<IEnumerable<Item>> GetItemsBySpotIdAsync(int spotId);
+         IQueryable<Item> GetAllAsyncPaginacao();
         // Task<Item> GetItemByNameAsync(string name);
     }
     

@@ -1,14 +1,14 @@
 ﻿using projetoBDO.Entities;
-using projetoBDO.Repository.Interfaces;
+using projetoBDO.Repository.Itens;
 
 namespace projetoBDO.Services
 {
     public class ItemService
     {
-        protected readonly IItemRepository _itemRepository;
+        private readonly IItensRepository _itemRepository;
         
 
-        public ItemService(IItemRepository itemRepository)
+        public ItemService(IItensRepository itemRepository)
         {
             _itemRepository = itemRepository;
         }
@@ -17,6 +17,11 @@ namespace projetoBDO.Services
         public async Task<Item> GetItemByIdAsync(int id)
         {
             return await _itemRepository.GetAsync(id);
+        }
+
+        public async Task<IEnumerable<Item>> GetItensBySpot(int id)
+        {
+            return await _itemRepository.GetItemsBySpotIdAsync(id);
         }
         public async Task<IEnumerable<Item>> GetAllItemsAsync()
         {

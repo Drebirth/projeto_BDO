@@ -26,27 +26,28 @@ namespace projetoBDO.Controllers
         }
 
         // GET: Grind
-        public  async Task<IActionResult> Index(int page =1)
+        public  async Task<IActionResult> Index(int page = 1)
         {
             var grinds = await _grindService.GetGrindsPagina(page, 10);
             return View(grinds);
         }
-        public async Task<IActionResult> Index2(int page = 1, int pageSize = 10)
-        {
-            var allItems = await _grindService.GetAllAsync();  // retorna List<Grind>
 
-            var totalItems = allItems.Count();
-            var paginacao = allItems
-                .OrderBy(c => c.Id)
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+        //public async Task<IActionResult> Index2(int page = 1, int pageSize = 10)
+        //{
+        //    var allItems = await _grindService.GetAllAsync();  // retorna List<Grind>
 
-            ViewBag.TotalPages = (int)Math.Ceiling((double)totalItems / pageSize);
-            ViewBag.CurrentPage = page;
+        //    var totalItems = allItems.Count();
+        //    var paginacao = allItems
+        //        .OrderBy(c => c.Id)
+        //        .Skip((page - 1) * pageSize)
+        //        .Take(pageSize)
+        //        .ToList();
+
+        //    ViewBag.TotalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+        //    ViewBag.CurrentPage = page;
           
-            return View(paginacao);
-        }
+        //    return View(paginacao);
+        //}
 
         public async Task<IActionResult> Create(int id)
         {

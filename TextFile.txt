@@ -1,0 +1,45 @@
+﻿Pontos para finalizar o projeto:
+
+
+Entidade Mapa
+
+1. Remover o acesso a criação/exclusão/edição de Itens do mapa e no mapa (deixar apenas para adm?) = OK
+2. Consertar o caminho para Detalhes no mapa para mostrar todos os itens drop daquele mapa = OK
+3. Paginação de mapas =  Ok
+
+
+Entidade Personagem 
+1. Consertar o caminho Editar personagem(modificar o nome, editar gears etc).
+2. Paginação de personagens
+3. Ajuste de tamanho no formulario de criação de personagem 
+4. Validações de personagens(Não pode criar um personagem já registrado em outra conta)
+5. Adicionar Select de classes para criação
+
+
+
+Entidade Grind(Diario)
+
+1. Ajustar para que todos os grinds sejam apenas do usuário logado
+2. Incluir uma opção para deletar o grind 
+3. Mostrar classe no grind(diario)
+
+Interface Login
+
+1. Ajustar a centralização da interface
+2. Retirar o Lembrar-me 
+
+
+
+Entidade login(aspnet user)
+
+1. Ajustar para cadastro de e-mail, recuperação etc? 
+2. Como posso redefinir a senha?  Passando um e-mail cadastrado? Recuperação de senha ?
+
+
+Criar uma view para a visualização de grind mundial(Todos os grinds, aplicar filtros e etc...)
+Estilização do projeto, mudança de cores, botões etc...
+Ajustar paginação para ficar Fixar superior a footer?
+Modificar o Nome para Diario de Grind
+
+
+
