@@ -27,7 +27,7 @@ namespace projetoBDO.Controllers
             return View();
         }
 
-        [HttpGet("id")]
+        [HttpGet("mapa/id")]
         public async Task<IActionResult> Details(int id)
         {
             var mapa = await _mapaService.GetMapaPorId(id);

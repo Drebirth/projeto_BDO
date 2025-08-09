@@ -14,6 +14,7 @@ public class Personagem
     [Required]
     public string NomeDeFamilia { get; set; }
     public string? Nome { get; set; }
+    public ClassesBDO Classes { get; set; }
     public string? Classe { get; set; }
     public int? PA {get; set; }
     public int? DP { get; set; }  

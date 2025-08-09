@@ -1,23 +1,26 @@
-@model projetoBDO.Entities.Personagem
+@model projetoBDO.Models.PersonagemViewModel
 
 @{
     ViewData["Title"] = "Criação de personagem";
 }
 
 <form asp-action="Create" method="post">
-       
-        <div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="row mb-3">
 		<label class="form-label">Nome de Família</label>
-		<input class="form-control" asp-for="NomeDeFamilia" value="@User.Identity.Name"/>
+		<input class="form-control" asp-for="NomeDeFamilia" value="@User.Identity.Name" readonly/>
         </div>
         <div class="row mb-3">
             <label class="form-label">Nome</label>
             <input class="form-control" asp-for="Nome"/>
+		    <span asp-validation-for="Nome" class="text-danger"></span>
         </div>
-        <div class="row mb-3">
-            <label class="form-label">Classe</label>
-            <input class="form-control" asp-for="Classe"/>
-        </div>
+         <div class="row mb-3">
+             <label class="form-label">Classe</label>
+             <select asp-for="Classe" asp-items="ViewBag.Classes" class="form-control"></select>
+         </div>
+
         <div class="row mb-3">
             <label class="form-label">PA</label>
             <input class="form-control" asp-for="PA"/>
@@ -35,7 +38,7 @@
         </div>
 </form>
 
-<a asp-action="Index" class="btn btn-secondary">Voltar</a>
+@* <a asp-action="Index" class="btn btn-secondary">Voltar</a> *@
 
 @section Scripts {
     @{

@@ -1,5 +1,7 @@
 ﻿using projetoBDO.Context;
 using projetoBDO.Entities;
+using projetoBDO.Models;
+using projetoBDO.Paginacao;
 using projetoBDO.Repository.Personagens;
 using System.Security.Claims;
 
@@ -24,6 +26,13 @@ namespace projetoBDO.Services
 
         }
 
+        public async Task<PaginatedList<Personagem>> GetPersonagemPagina( int pageIndex =1, int pageSize=10)
+        {
+            var userName = _httpContext.HttpContext?.User?.FindFirst(ClaimTypes.Name)?.Value;
+            var personagensQuery = _repository.GetPersonagemPagina(userName);
+            return await PaginatedList<Personagem>.CreateAsync(personagensQuery, pageIndex, pageSize);
+        }
+
         public async Task<Personagem> GetPersonagemByIdAsync(int id)
         {
             var personagem = await _repository.GetAsync(id);
@@ -34,28 +43,45 @@ namespace projetoBDO.Services
             return personagem;
         }
 
-        public async Task CreatePersonagemAsync(Personagem personagem)
-        {
-            if (personagem == null)
+        public async Task CreatePersonagemAsync(PersonagemViewModel personagem)
+        {       
+          var novoPersonagem = new Personagem
             {
-                throw new ArgumentNullException(nameof(personagem), "Personagem cannot be null.");
-            }
+                Nome = personagem.Nome,
+                Classe = personagem.Classe,
+                Level = personagem.Level,
+                NomeDeFamilia = personagem.NomeDeFamilia,
+                PA = personagem.PA,
+                DP = personagem.DP,
+                
+
+
+          };
+
             var userName = _httpContext.HttpContext?.User?.FindFirst(ClaimTypes.Name)?.Value;
-            personagem.NomeDeFamilia = userName;
-            await _repository.CreateAsync(personagem);
+                personagem.NomeDeFamilia = userName;
+                await _repository.CreateAsync(novoPersonagem);
+            
+           
+        }
+
+        public async Task<ServiceResult> ValidacaoPersonagem(PersonagemViewModel personagem)
+        {
+            var result = new ServiceResult();
+            var NomePersonagemExiste = await _repository.GetPersonagemForName(personagem.Nome);
+
+            if (NomePersonagemExiste != null)
+            {
+                result.Errors.Add($"Personagem com nome {personagem.Nome} já existe.");
+                
+            }
+            result.Success = result.Errors.Count == 0;
+            return result;
         }
 
         public async Task UpdatePersonagemAsync(Personagem personagem)
         {
-            if (personagem == null)
-            {
-                throw new ArgumentNullException(nameof(personagem), "Personagem cannot be null.");
-            }
-            var existingPersonagem = await _repository.GetAsync(personagem.Id);
-            if (existingPersonagem == null)
-            {
-                throw new KeyNotFoundException($"Personagem with ID {personagem.Id} not found.");
-            }
+            
             await _repository.UpdateAsync(personagem);
         }
 

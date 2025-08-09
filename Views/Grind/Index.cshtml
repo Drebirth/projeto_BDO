@@ -7,8 +7,8 @@
 		<tr>
 			<th>Mapa</th>
 			<th>Personagem</th>
+			<th>Classe</th>
 			<th>Valor do grind</th>
-			
 			<th>Excluir</th>
 		</tr>
 	</thead>
@@ -18,18 +18,20 @@
 			<tr>
 				<td>@grind.Mapa</td>
 				<td>@grind.NomePersonagem</td>
+				<td>@grind.Classe</td>
 				<td>
 					 @Html.DisplayFor(m => grind.ValorTotal) 
 					
 
 				</td>
+				<td><a asp-action="Delete" asp-route-id="@grind.Id" class="btn btn-danger">Delete</a></td>
 				
 			</tr>
 		}
 	</tbody>
 </table>
 
-<div>
+<div class="fixed-bottom bg-dark text-white text-center p-3" style="margin-bottom: 75px">
 	Página @Model.PageIndex de @Model.TotalPages
 	@if (Model.HasPreviousPage)
 	{

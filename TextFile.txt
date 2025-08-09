@@ -9,24 +9,24 @@ Entidade Mapa
 
 
 Entidade Personagem 
-1. Consertar o caminho Editar personagem(modificar o nome, editar gears etc).
-2. Paginação de personagens
-3. Ajuste de tamanho no formulario de criação de personagem 
-4. Validações de personagens(Não pode criar um personagem já registrado em outra conta)
-5. Adicionar Select de classes para criação
+1. Consertar o caminho Editar personagem(modificar o nome, editar gears etc).  = OK
+2. Paginação de personagens = Ok
+3. Ajuste de tamanho no formulario de criação de personagem  = ok
+4. Validações de personagens(Não pode criar um personagem já registrado em outra conta) = ok
+5. Adicionar Select de classes para criação =OK
 
 
 
 Entidade Grind(Diario)
 
-1. Ajustar para que todos os grinds sejam apenas do usuário logado
-2. Incluir uma opção para deletar o grind 
-3. Mostrar classe no grind(diario)
+1. Ajustar para que todos os grinds sejam apenas do usuário logado = ok
+2. Incluir uma opção para deletar o grind = ok
+3. Mostrar classe no grind(diario)  = ok
 
 Interface Login
 
-1. Ajustar a centralização da interface
-2. Retirar o Lembrar-me 
+1. Ajustar a centralização da interface = ok
+2. Retirar o Lembrar-me  = ok
 
 
 

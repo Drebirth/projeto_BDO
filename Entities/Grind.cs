@@ -17,7 +17,11 @@ public class Grind
 
     public int PersonagemId { get; set; }
 
+    public string? NomeDeFamilia { get; set; }
+
     public string? NomePersonagem { get; set; }
+
+    public string? Classe { get; set; }
 
     public string Mapa { get; set; }
 

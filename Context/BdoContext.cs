@@ -21,6 +21,8 @@ namespace projetoBDO.Context
 
         public DbSet<ItensGrind> ItensGrinds { get; set; }
 
+     
+
         /* protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
              modelBuilder.Entity<Item>()

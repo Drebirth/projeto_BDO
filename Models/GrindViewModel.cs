@@ -13,7 +13,7 @@ namespace projetoBDO.Models
         public List<Personagem>? Personagens { get; set; }
        public List<Item>? Itens { get; set; }
         //public ICollection<ItensGrind>? Itensgrind { get; set; }
-       
+      // public ClassesBDO? ClassesBDO { get; set; }
         public int? Quantidade { get; set; }
        public decimal? ValorTotal { get; set; }
 

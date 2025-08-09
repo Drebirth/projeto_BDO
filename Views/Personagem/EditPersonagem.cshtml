@@ -4,10 +4,15 @@
     ViewData["Title"] = "Editar personagem";
 }
 
-<form asp-action="Edit" method="post">
+<form asp-controller="Personagem" asp-action="EditPersonagem" method="post">
 
+        <input hidden asp-for="Id"/>
+    <div class="row mb-3">
+        <label class="form-label">Nome de Familia</label>
+        <input type="text" asp-for="NomeDeFamilia" class="form-control" readonly/>
+    </div>
         <div class="row mb-3">
-            <label class="form-label">Nome</label>
+            <label class="form-label">Personagem</label>
             <input type="text" asp-for="Nome" class="form-control" />
         </div>
         <div class="row mb-3">
@@ -27,7 +32,7 @@
             <input class="form-control" type="number" asp-for="Level"/>
         </div>
         <div class="botao">
-            <button type="submit" class="btn btn-primary" style="width: 60%;" >Salvar</button>
+            <button type="submit" class="btn btn-primary" style="width: 60%;">Salvar</button>
         </div>
 </form>
 <a asp-controller="Personagem" asp-action="Index" class="btn btn-secondary">Voltar</a>

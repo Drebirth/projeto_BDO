@@ -28,9 +28,10 @@ namespace projetoBDO.Controllers
         // GET: Grind
         public  async Task<IActionResult> Index(int page = 1)
         {
-            var grinds = await _grindService.GetGrindsPagina(page, 10);
+            var grinds = await _grindService.GetGrindsPagina(page);
             return View(grinds);
         }
+   
 
         //public async Task<IActionResult> Index2(int page = 1, int pageSize = 10)
         //{
@@ -45,7 +46,7 @@ namespace projetoBDO.Controllers
 
         //    ViewBag.TotalPages = (int)Math.Ceiling((double)totalItems / pageSize);
         //    ViewBag.CurrentPage = page;
-          
+
         //    return View(paginacao);
         //}
 

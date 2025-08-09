@@ -8,5 +8,7 @@ namespace projetoBDO.Repository.Personagens
         Task<IEnumerable<Personagem>> GetAllAsync(string userName);
         // You can add any specific methods for Personagem here if needed
         // For example, methods to find characters by specific criteria, etc.
+        IQueryable<Personagem> GetPersonagemPagina(string NomeDeFamilia);
+        Task<Personagem> GetPersonagemForName(string Nome);
     }
 }

@@ -1,14 +1,16 @@
+using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using MimeKit;
+using projetoBDO.Context;
+using projetoBDO.Models;
+using projetoBDO.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using projetoBDO.Context;
-using projetoBDO.Models;
-using projetoBDO.Repository;
 
 namespace projetoBDO.Controllers.accountController
 {
@@ -57,7 +59,7 @@ namespace projetoBDO.Controllers.accountController
                  {
                      await signInManager.SignInAsync(user, isPersistent: false);
                     //await userManager.AddClaimAsync(user, new Claim("PERMISSAO","ADMIN"));
-                    await userManager.AddToRoleAsync(user, "ADMIN");
+                    await userManager.AddToRoleAsync(user, "USER");
                     
                     return RedirectToAction("Index", "Personagem");
                  }
@@ -105,6 +107,10 @@ namespace projetoBDO.Controllers.accountController
         {
             return View();
         }
-        
-    }
+
+
+
+
+
+}
 }

@@ -1,4 +1,5 @@
-﻿using PagedList;
+﻿using Azure.Core.GeoJson;
+using PagedList;
 using projetoBDO.Entities;
 using projetoBDO.Models;
 using projetoBDO.Paginacao;
@@ -7,6 +8,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -40,11 +42,11 @@ namespace projetoBDO.Services
 
         public async Task<PaginatedList<Grind>> GetGrindsPagina(int pageIndex = 1, int pageSize = 15)
         {
-           
 
+            var userName = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.Name)?.Value;
             // Utilizo o metodo CreateAsync para criar a lista paginada
             // lista já transformada em Asqueryable
-            var grinds =  _IGrindRepository.GetAllAsyncPaginacao();
+            var grinds =  _IGrindRepository.GetAllAsyncPaginacao().Where(u => u.NomeDeFamilia.Equals(userName));
             return await PaginatedList<Grind>.CreateAsync(grinds, pageIndex, pageSize);
 
         }
@@ -55,9 +57,12 @@ namespace projetoBDO.Services
      
         public async Task CreateAsync(Grind grind, List<Item> itens)
         {
+            var userName = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.Name)?.Value;
             var personagem = await _personagemService.GetPersonagemByIdAsync(grind.PersonagemId);
             grind.NomePersonagem = personagem.Nome;
+            grind.Classe = personagem.Classe;
             grind.ValorTotal = CalcularSubTotal(itens); // Corrige o valor total para centavos
+            grind.NomeDeFamilia = userName;
             await _IGrindRepository.CreateAsync(grind);
             decimal subTotal = 0;
             for (int i = 0; i < itens.Count; i++)
